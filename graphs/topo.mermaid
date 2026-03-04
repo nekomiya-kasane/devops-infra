@@ -1,0 +1,69 @@
+graph TD
+    %% --- 入口层 ---
+    Internet((互联网)) --> Router[核心路由器/网关]
+    Router -.->|摆渡| CoreSwitch{"核心交换机<br/>(支持 VLAN)"}
+
+    %% --- 办公网络 VLAN 10 ---
+    subgraph "VLAN 10: 办公开发网 (192.168.10.x)"
+        style OfficeNet fill:#e1f5fe,stroke:#01579b
+        DevPC1[开发人员 PC1]
+        DevPC2[开发人员 PC2]
+        DevPC3[实习生 PC]
+        DevPC1 -.->|HTTPS/SSH| CoreSwitch
+        DevPC2 -.->|HTTPS/SSH| CoreSwitch
+        DevPC3 -.->|HTTPS/SSH| CoreSwitch
+    end
+
+    %% --- 核心服务与存储 VLAN 20 & 30 ---
+    subgraph "核心机房 (机柜/特定区域)"
+        style ServerRoom fill:#fff3e0,stroke:#ff6f00
+        
+        %% 核心服务器
+        subgraph "Core Host (高性能 Linux)"
+            style CoreHost fill:#ffe0b2,stroke:#ef6c00
+            DockerRuntime[Docker 运行时]
+            Traefik["网关: Traefik<br/>(80/443)"]
+            GitLab[GitLab & Runner]
+            Nexus[Nexus 制品库]
+            Auth[Keycloak]
+            Ansible[Ansible 控制端]
+            
+            Traefik --> GitLab
+            Traefik --> Nexus
+            Traefik --> Auth
+        end
+
+        %% 存储设备
+        TrueNAS["TrueNAS Scale<br/>(核心存储)"]
+
+        %% 核心连接
+        CoreSwitch == 10GbE 光纤/电口 ==> CoreHost
+        CoreSwitch == 10GbE 光纤/电口 ==> TrueNAS
+        
+        %% iSCSI 专用通道 (逻辑或物理直连)
+        CoreHost <== VLAN 30: iSCSI/NFS 存储专用网络 ==> TrueNAS
+    end
+
+    %% --- 执行与测试 VLAN 40 ---
+    subgraph "VLAN 40: 构建与测试实验室 (192.168.40.x)"
+        style TestLab fill:#e8f5e9,stroke:#2e7d32
+        
+        %% 虚拟机节点
+        VMHost[PVE/Hyper-V 宿主机]
+        VM_Win["VM: Windows Build Agent<br/>(一次性环境)"]
+        VMHost --> VM_Win
+        
+        %% 实体测试节点
+        Phy_Test1["实体测试机 01<br/>(高配显卡/多屏)"]
+        Phy_Test2["实体测试机 02<br/>(真实硬件环境)"]
+        
+        %% 连接
+        CoreSwitch -->|WoL 唤醒| Phy_Test1
+        CoreSwitch -->|WoL 唤醒| Phy_Test2
+        CoreSwitch --> VMHost
+    end
+
+    %% --- 流量流向说明 ---
+    DockerRuntime -.->|挂载数据| TrueNAS
+    VM_Win -.->|拉取代码/推上传品| Nexus
+    Phy_Test1 -.->|GUI 测试汇报| GitLab

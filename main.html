@@ -1,0 +1,764 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
+.mac-os-11 { --title-bar-height: 28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+thead, tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex: 2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
+.md-alert.md-alert-note { border-left-color: rgb(9, 105, 218); }
+.md-alert.md-alert-important { border-left-color: rgb(130, 80, 223); }
+.md-alert.md-alert-warning { border-left-color: rgb(154, 103, 0); }
+.md-alert.md-alert-tip { border-left-color: rgb(31, 136, 61); }
+.md-alert.md-alert-caution { border-left-color: rgb(207, 34, 46); }
+.md-alert { padding: 0px 1em; margin-bottom: 16px; color: inherit; border-left: 0.25em solid rgb(0, 0, 0); }
+.md-alert-text-note { color: rgb(9, 105, 218); }
+.md-alert-text-important { color: rgb(130, 80, 223); }
+.md-alert-text-warning { color: rgb(154, 103, 0); }
+.md-alert-text-tip { color: rgb(31, 136, 61); }
+.md-alert-text-caution { color: rgb(207, 34, 46); }
+.md-alert-text { font-size: 0.9rem; font-weight: 700; }
+.md-alert-text svg { fill: currentcolor; position: relative; top: 0.125em; margin-right: 1ch; overflow: visible; }
+.md-alert-text-container::after { content: attr(data-text); text-transform: capitalize; pointer-events: none; margin-right: 1ch; }
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow: auto hidden; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; outline: 0px; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: auto hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 10px; z-index: 3; overflow-y: hidden; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; overflow-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { overflow-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; inset: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+span.cm-underlined { text-decoration: underline; }
+span.cm-strikethrough { text-decoration: line-through; }
+.cm-tw-syntaxerror { color: rgb(255, 255, 255); background-color: rgb(153, 0, 0); }
+.cm-tw-deleted { text-decoration: line-through; }
+.cm-tw-header5 { font-weight: 700; }
+.cm-tw-listitem:first-child { padding-left: 10px; }
+.cm-tw-box { border-style: solid; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-color: inherit; border-top-width: 0px !important; }
+.cm-tw-underline { text-decoration: underline; }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    pre {
+        page-break-inside: avoid;
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.mac-os #write{
+    caret-color: AccentColor;
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+/*.html-for-mac {
+    --item-hover-bg-color: #E6F0FE;
+}*/
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+    opacity: 0.4;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+.menu-item-container a.menu-style-btn {
+    background-color: #f5f8fa;
+    background-image: linear-gradient( 180deg , hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0)); 
+}
+
+
+
+</style><title>main</title>
+</head>
+<body class='typora-export os-windows'><div class='typora-export-content'>
+<div id='write'  class=''><h1 id='可维护可拓展的-devops-和版本管理系统设计草案'><span>可维护可拓展的 DevOps 和版本管理系统设计草案</span></h1><blockquote><p><span>方便起见，这里我们把所有认证相关的和辅助开发的物理资源、服务、规范、流程统称为 CI/CD，尽管已经远超这个词的最大语义范围</span></p></blockquote><h1 id='背景'><span>背景</span></h1><p><span>自去年以来，公司已经明面上投入了可能超过 600 小时的工作量在运维和 DevOps 相关工作上，经手人员设计涉及李一喆、苏鹏、冯智洋、毛亦夫及一个实习生，直至今日也没有完成，折算为开发费用非常昂贵。同时，工作内容呈现出不可维护性和反复性，东一榔头西一棒槌，缺乏顶层设计，即使有了顶层设计也无人执行到底。</span></p><p><span>不可维护性体现在：</span></p><ol start='' ><li><p><span>受限于硬件预算和开发环境，各个组件的实装内容存在大量妥协，无法拓展</span></p></li><li><p><span>受限于开发需求的紧迫性，无论是代码内还是代码外都大量存在开洞的状态，众多已开发过的工具事实上处于荒废的状态</span></p></li><li><p><span>没有成型的规章制度保证开发、运维系统的稳定和可预测</span></p></li><li><p><span>没有统一的源码管理和审查规范，缺乏源码质量的直观反馈，每一次提交都是存在很大风险的，导致特性分支迟迟无法安全合并</span></p></li><li><p><span>缺乏维护文档，各种基础服务交错纵横，又无法安全迁移和升级</span></p></li></ol><p><span>反复性体现在：</span></p><ol start='' ><li><p><span>仓库管理存在反复。在前期更是由于混乱的提交导致代码库巨量膨胀，不得不消耗两人周的时间重新整理代码并提交，时至今日，代码仓库的熵仍然在不可逆地快速增长，提交混乱，分支混乱。</span></p></li><li><p><span>代码管理存在反复。由于没有合理的分支管理规范，谁在开发什么，进度如何，产生了多少问题缺乏统一的观测手段，目前强依赖于 Outline 中的文档交换信息——然而这样的信息是天然于源码之间没有关联手段的，Outline 的设计也不是为了临时性的信息交换。并且，当开发结束时，Outline 文档即被废弃，无法回溯。同时由于权限问题，Outline 文档无法被所有参与者看到。这是非常原始的、无法留档的交流手段。</span></p></li><li><p><span>开发内容存在反复。主要存在于开发辅助工具中。代码的编译系统经历过多次改变，前期是由于需求的变更，后期则是由于想法的变化和经手人的变化，这是开发中的正常现象，且目前已趋于稳定。然而，例如流水线和 DevOps 的开发却是始终反复的，交接时下一位同事总是从头做起，每次都产生了一个全新版本的 CI/CD 设计，这主要有以下原因：</span></p><ol start='' ><li><p><span>上一个版本的 CI/CD 没有用户，没有时间完善，因而也没有稳定的文档</span></p></li><li><p><span>缺乏统一的 Specification，导致迥然而异的设计风格，无法、或者没有意识复用此前的产出内容</span></p></li><li><p><span>因为打包、发布等子系统无人维护，也没有自动化工具和强规范保证其可以得到维护，逐渐被废弃，上一个版本的 CI/CD 逐渐失去支撑</span></p></li></ol></li></ol><p><span>然而，一个良好的 CI/CD 系统是必要的，它可以保证：</span></p><ol start='' ><li><p><span>我们可以不必投入人力验证每次更改是否是合理的、是否产生了退行、是否影响了编译，可以辅助较为安全地合并每次更改</span></p></li><li><p><span>我们可以对代码质量进行量化，同时依据量化结果约束代码质量，从而获取对于项目健康状况的直观认识，同时为下文将提到的代码审查提供有力支撑</span></p></li><li><p><span>我们可以自动化地验证项目的跨平台兼容性、自动化地组织部署和发布</span></p></li><li><p><span>另外，也保证了 CI/CD 系统自身是可维护的，能够随着开发状况和团队需求的变化而安全、迅速地变化</span></p></li></ol><p><span>这里提及的“良好的 CI/CD 系统“包括以下内涵：</span></p><ol start='' ><li><p><span>一个稳健的、宽松的硬件基础设施。</span></p><ol start='' ><li><p><span>其容量足够大，足够容纳未来的扩展需求——基于当前情况设置上限是不合理的</span></p></li><li><p><span>有定期运行的、定时校验完好性的备份系统</span></p></li></ol></li><li><p><span>一个整洁的、方便维护&amp;拓展和回滚的基础服务集合。这样的服务应当包含以下内容：</span></p><ol start='' ><li><p><span>一个可以通览服务状态、可以实时预警的 Dashboard</span></p></li><li><p><span>一个内网的 CA 和 DNS 域名系统，使用 IP:Port 访问是难于维护、不宜迁移的</span></p></li><li><p><span>一个内网的邮件或通知系统，当代码产生变更或者出现新的评论时，开发人员应当知晓</span></p></li><li><p><span>一个中心化的认证系统，由于处在内网开发环境，我们对安全的需求并不高，因此认证系统不存在很强的升级需求，较为稳定，因此可以支持将身份和内容解耦，内容系统将可以更宽松地升级</span></p></li><li><p><span>一个备份和回滚系统，能够方便地组织备份文件</span></p></li><li><p><span>一些静态分析工具。采取定时、事件触发组合的形式，时刻更新代码的状况，以及支撑合并审查</span></p></li><li><p><span>一套测试与分布式测试框架和对应工具</span></p></li><li><p><span>一个容器管理、发布系统。方便打包开发环境和快速跨平台调试——对于一个物理机来说，恢复环境过于困难</span></p></li><li><p><span>一些容器和物理机。分布式执行静态分析、编译、测试、打包、发布流程</span></p></li><li><p><span>一些常用源的镜像</span></p></li></ol></li><li><p><span>一套层次分明，有一定强制性的执行规范和文档。没有人监督的系统会迅速变得荒芜。包括：</span></p><ol start='' ><li><p><span>代码规范</span></p></li><li><p><span>提交规范</span></p></li><li><p><span>合并、代码审查规范</span></p></li><li><p><span>发布规范</span></p></li><li><p><span>基础服务维护规范</span></p></li><li><p><span>硬件维护规范</span></p></li></ol></li><li><p><span>有固定的人员维护。人员的变更将使得经验难于传递，系统的设计风格变得凌乱。</span></p></li></ol><p><span>近期，由于田同学的加入，开始有望有固定的人实现这样一个系统，避免出现一直存在的开发窘境，当然避免笔者过去的产出和想法打水漂，写了此文。</span></p><p><strong><span>目标是</span></strong><span>：收敛熵增，强制规范，自动化一切。</span></p><h1 id='架构'><span>架构</span></h1><p><span>在背景中，我们其实已经叙述了需求和愿景，这里直截了当地给出系统架构。此系统分为四层：</span></p><ol start='' ><li><p><span>物理基础设施层。包括核心服务器和虚拟节点，用于整备所有物理资源。</span></p></li><li><p><span>核心服务层。包括所有服务与数据，使用 Docker 统一管理，构成公司的核心数字资产。</span></p></li><li><p><span>执行与工作流层。基于核心服务执行数据管理、代码管理、编译测试等具体事务。</span></p></li><li><p><span>规范与治理层（Specifications）。用于规范执行层的使用方式，定义规则。</span></p></li></ol><h2 id='物理基础设施层'><span>物理基础设施层</span></h2><h3 id='着眼点'><span>着眼点</span></h3><p><span>这一层次的设计受上层服务类型影响，主要考虑点为：</span></p><p><span>首先是</span><strong><span>计算与管理分离</span></strong><span>。GitLab 之类的服务与具体的计算任务，例如编译、测试等不可以放在同一台机器上，否则容易出现 IO 竞争和资源抢占，导致基础服务无法正常工作。因此我们划分为三类节点：</span></p><ol start='' ><li><p><span>管理节点（下称 OpsHost）：运行 GitLab、AD 域控、DNS、DHCP、Ansible 控制端。此类服务对 CPU 要求不高，但对 延迟和稳定性 极敏感。</span></p></li><li><p><span>计算节点（下称计算节点）：运行编译、测试等计算密集型任务。此类服务对 CPU 要求极高，对延迟和稳定性要求不高。开发机也在此列。</span></p></li><li><p><span>存储节点（下称存储节点）：运行存储服务，包括 iSCSI、NFS 等。此类服务对 CPU 要求不高，但对延迟和稳定性要求极高。</span></p></li></ol><p><span>其次是</span><strong><span>存储与服务分离</span></strong><span>。其目的有两点：</span></p><ol start='' ><li><p><span>保证存储空间可随时拓展和备份，不会影响到服务本身的配置。如果运维做的好，甚至可以在核心服务保持运行的情况下，拓展或更换存储介质。</span></p></li><li><p><span>服务无状态化，保证服务配置变更的安全性。更改 Dockerfile 之类的配置文件后，我们可以相信服务背后的数据——包括我们的代码仓库、各种二进制制品、文档都在独立存储介质的文件系统或数据库中。即使服务和计算节点硬件损坏，只需更换硬件并重新通过 PXE/Ansible 部署即可，不涉及数据迁移。</span></p></li></ol><p><span>我们开发涉及到的持久化数据一般有三种：</span></p><ol start='' ><li><p><span>GitLab 的仓库数据、Docker 镜像、二进制制品（包括模型文件、测试结果、编译结果等），它们通过 NFS/iSCSI 挂载在 TrueNAS 上</span></p></li><li><p><span>践行 Iac (Infrastructure as Code)，服务本身的配置（Dockerfile, Ansible Playbooks etc.）也是代码，它们存储在仓库中，并在硬盘中保留文件备份，以防仓库宕机。</span></p></li><li><p><span>底层保留 iSCSI 和 SAN 的拓展接口。当未来团队继续扩展，TrueNAS 读写遇到瓶颈时，可以只动存储单元，平滑引入分布式存储和高速内部网络，上层服务无感知，不需要重新配置服务。</span></p></li></ol><p><span>另外，</span><strong><span>测试环境</span></strong><span>的硬件需要分层管理（测试流程也需要分层管理，下文会提及）。可选的测试环境方案有以下几类，依据隔离性、维护成本和适用场景进行对比：</span>
+<img src="assets/test_environment_comparison.svg" referrerpolicy="no-referrer" alt="分层测试环境方案对比">
+<span>我们只主要选择 1，5，6，7. 原因如下：</span></p><ol start='' ><li><p><span>环境方案 1 对应</span><strong><span>本地开发环境</span></strong><span>。开发机的性能将极大影响开发效率，因此我们尽量避免在开发机上添加任何虚拟环境，特别是在开启了 Hyper-V 的情况下，再使用 VMWare 构成了嵌套虚拟化。虚拟机相较于 Docker/WSL 来说不够轻量和便捷，相较于物理机来说又不够真实，不适合开发使用。推荐使用双系统开发或使用 Docker。</span></p></li><li><p><span>环境方案 5 对应</span><strong><span>Docker 集群化测试</span></strong><span>。负责包括代码提交后的 CI 流水线，逻辑功能测试、接口测试、Headless 服务测试在内的各种与 GUI 无关的批量测试，Docker Container 实例资源丰富、易于拓展的特点将使得这一过程非常迅速和标准化。</span></p></li><li><p><span>环境方案 6 对应</span><strong><span>兼容性验证集群</span></strong><span>。用于验证软件在不同 OS（Win10/Win11/Ubuntu/Kylin）下的安装与运行情况。同时，由于虚拟机也可以随意拓展（虽然成本高于 Docker），也便于开发者通过远程桌面前往调试一些 GUI 程序。</span></p></li><li><p><span>环境方案 7 对应</span><strong><span>跨平台裸机性能与硬件测试环境</span></strong><span>。我们必需 Bare Metal 测试机，测试软件在真实硬件条件、真实使用场景下的表现。这些机器需要测试结束后重启通过脚本自动还原或切换回初始状态，避免环境发生漂移。这既保证了物理硬件的独占性，又解决了物理机环境难以重置的痛点。</span></p></li></ol><p><span>然后是</span><strong><span>开发环境</span></strong><span>，开发环境最好使用 VHDX 文件启动，有需求的基于 Ventoy 配置双系统。这与目前基于镜像拷贝的装机模式差别不大，仍然保持充分的自由，不详述。事实上，我认为开发机应该包含尽可能多的内容，保证开盒即用——毕竟传东西到内网很麻烦，自己安装极其容易造成环境漂移，在此基础上，允许追求极致的稳定与习惯，这不同于测试机，测试机追求极致的灵活性与一致性。</span></p><p><span>最后，我们需要考虑</span><strong><span>备份和断电</span></strong><span>情况。</span></p><ol start='' ><li><p><span>备份一般遵循 3-2-1 备份原则，即 3 份数据副本，2 种不同的存储介质，1 份异地存放，但我们的需求并没有太复杂，因此可以设计简化的版本。另外，由于存储与服务分离的原则，我们不需要备份服务的 Docker Container，只需要备份 NAS 上的数据。</span></p><ol start='' ><li><p><span>首先需要一个</span><strong><span>热备份</span></strong><span>。热备份频率高，可能一小时一次，并保留最新的数个~数十个记录，末尾循环删除。ZFS 分区支持快照。特别是因为众多服务都在同一台机器上，服务机最好做双机热备。</span></p></li><li><p><span>其次需要一个</span><strong><span>冷备份</span></strong><span>。冷备份频率低，可能一周一次，防止 NAS 物理损坏或机房事故。</span></p></li><li><p><span>最后需要对</span><strong><span>服务配置单独备份</span></strong><span>。服务配置备份触发于每次服务发生更改时，便于服务快速恢复，且数据量不会太大。</span></p></li></ol></li><li><p><span>针对机房可能出现的</span><strong><span>异常断电</span></strong><span>情况，必须建立软硬件联动的保护机制，防止文件系统损坏（特别是 ZFS 和数据库）。特别是 Linux 系统，断电时很容易造成系统和数据损坏。</span>
+<span>物理层面上，我们只需要多准备一个支持网络管理和 USB 通讯的 UPS，容量支持核心设备继续运行 20 分钟即可。断电发生时，若短时没有恢复，UPS 应当经由 NAS 通知服务层、计算层、存储层依次关闭，最后关闭物理设备。</span></p></li></ol><h3 id='架构设计'><span>架构设计</span></h3><h4 id='网络拓扑和电源时序'><span>网络拓扑和电源时序</span></h4><p><span>综上所述，我们的内网基本物理架构和网络拓扑如下：</span></p><p><img src="assets/net_topo_1.png" referrerpolicy="no-referrer" alt="物理基础设施与网络拓扑"></p><p><span>注意上图中</span><code>TrueNAS</code><span>没有画出，它应该在一台独立的机器上；VM2 现已拆分为 VM-2~4。异常断电相关的硬件和时序如图：</span></p><p><img src="assets/20260205_145950_Gemini_Generated_Image_juog3juog3juog3j.png" referrerpolicy="no-referrer"></p><p><span>我们需要至少 4 台物理设备节点：</span></p><figure class='table-figure'><table><thead><tr><th><span>节点编号</span></th><th><span>设备角色</span></th><th><span>硬件</span></th><th><span>核心软件</span></th></tr></thead><tbody><tr><td><span>P-01</span></td><td><span>数据服务器</span></td><td><span>需要较大的内存和极大的硬盘，当前内网 230 文件服务器可担此任</span></td><td><span>TrueNAS Scale</span></td></tr><tr><td><span>P-02</span></td><td><span>核心服务中心</span></td><td><span>需要极大的内存和极强的处理器，高速缓存，当前内网 230 文件服务器可担此任</span></td><td><span>TrueNAS Scale</span></td></tr><tr><td><span>E-01</span></td><td><span>摆渡数据服务器</span></td><td><span>存在于外网。用于定期更新上游镜像源数据，需要较大的硬盘，可以没有显示器</span></td><td><span>Windows + WSL</span></td></tr><tr><td><span>Net-01</span></td><td><span>核心交换机</span></td><td><span>至少 4 口万兆，预留给 NAS 的热备，需要有管理控制台</span></td><td><span>Console</span></td></tr></tbody></table></figure><p><span>在 P-02 上运行 4 台虚拟机:</span>
+<span>51</span></p><figure class='table-figure'><table><thead><tr><th><span>VM 编号</span></th><th><span>规格</span></th><th><span>角色</span></th><th><span>服务</span></th></tr></thead><tbody><tr><td><span>VM-1</span></td><td><span>4 核 8GB + 100GB</span></td><td><span>身份认证</span></td><td><span>AD 控制器、WSUS</span></td></tr><tr><td><span>VM-2</span></td><td><span>8 核 32GB + 500GB</span></td><td><span>代码管理</span></td><td><span>GitLab</span></td></tr><tr><td><span>VM-3</span></td><td><span>4 核 16GB + 200GB</span></td><td><span>二进制资产和第三方库管理</span></td><td><span>JFrog</span></td></tr><tr><td><span>VM-4</span></td><td><span>16 核 64GB + 500GB</span></td><td><span>服务集群</span></td><td><span>所有其他 Docker 服务</span></td></tr></tbody></table></figure><p><span>另外，我们还需要一台带有 USB 和网卡的 UPS，当机房断电时，通知 TrueNAS，让 TrueNAS 通过 NUT Service 通知 P-02 依次关闭所有服务，避免数据损坏。</span></p><h4 id='存储结构'><span>存储结构</span></h4><p><span>由于数据重要性不同，我们使用分层存储设计，考虑负载和数据重要性，优化成本的同时保护核心机械硬盘的 IOPS 不被琐碎的镜像文件读写所榨干。共分三层：</span></p><ol start='' ><li><p><span>快速访问层。处理的数据有海量小文件、高频 IOPS、极低延迟要求特征，包括分布式编译缓存、数据库、短期日志、源码仓库、Docker服务的持久化数据等，强调快速访问和低延迟。同时，如果能提供快速回滚和抗风险特性将是极好的。因此，我们选择ZFS + RAID-10以提高随机读写性能和缩短重建耗时，并开启LZ4压缩。</span></p></li><li><p><span>静态资产层。处理的数据包括历史编译制品、二进制依赖、LFS大对象、文档附件等，需要对大块数据顺序读写，需要高容量。因此可以使用HDD组建ZFS + RAID-Z2，并用SSD作为Special VDEV. 开启L2ARC缓存。</span></p></li><li><p><span>持久化存储层。处理的数据包括外部镜像、更新包、系统镜像、冷备份等，其体量巨大，损坏代价较小，访问不频繁，对延迟也不频繁，因此可以用大容量 HDD 组建 RAID-Z2 或不配置 RAID. 开启ZFS + ZSTD-9 压缩以节省空间。</span></p></li></ol><p><span>对应的大致硬件布局如下：</span></p><figure class='table-figure'><table><thead><tr><th><span>存储层级</span></th><th><span>硬件规格建议</span></th><th><span>数量</span></th><th><span>作用说明</span></th></tr></thead><tbody><tr><td><span>系统盘</span></td><td><span>32GB NVMe</span></td><td><span>1</span></td><td><span>仅用于 TrueNAS 操作系统安装。</span></td></tr><tr><td><span>全闪池 (Fast)</span></td><td><span>4~8TB NVMe SSD (企业级)</span></td><td><span>4</span></td><td><span>组建 RAID-10，承载代码仓库、编译缓存及所有 VM 运行。</span></td></tr><tr><td><span>数据池 (Asset)</span></td><td><span>16TB 企业级 HDD (现有)</span></td><td><span>5</span></td><td><span>组建 RAID-Z2，存放 LFS 大文件，提供约 36TB 净容量。</span></td></tr><tr><td><span>元数据加速</span></td><td><span>1TB/2TB NVMe SSD</span></td><td><span>2</span></td><td><span>组建 Mirror，作为 Asset-Pool 的 Special VDEV。</span></td></tr><tr><td><span>写缓存 (SLOG)</span></td><td><span>128GB/256GB 高寿命 NVMe</span></td><td><span>1</span></td><td><span>提升 NFS 写入性能并保护断电数据安全。</span></td></tr><tr><td><span>读缓存 (L2ARC)</span></td><td><span>(可选) 现有 NVMe 扩充</span></td><td><span>1</span></td><td><span>进一步加速热点资产文件的读取。</span></td></tr></tbody></table></figure><p><span>当然，如果有钱可以再扩充一倍，或将部分HHD替换为NVMe SSD.</span></p><p><span>这里我们大量使用了ZFS文件系统，因其提供了COW（写时复制）和校验和，保证数据完整性，并且内置压缩功能，支持快照和克隆，便于池化存储，而且支持内置的RAID-Z2，可以实现RAID-5的性能，同时提供RAID-6的容灾能力。</span></p><p><span>由于这部分与实际设备数量有关，这里仅为示例。如果按照上面数量安排的话，可以这样挂载：</span></p><figure class='table-figure'><table><thead><tr><th><span>挂载目标</span></th><th><span>对应 Dataset 路径</span></th><th><span>存储池选择</span></th><th><span>特殊配置项</span></th></tr></thead><tbody><tr><td><span>VM 镜像</span></td><td><span>fast-pool/iscsi-vms</span></td><td><span>Fast-Pool</span></td><td><span>Volblocksize=16k, 无压缩。</span></td></tr><tr><td><span>Git 源码</span></td><td><span>fast-pool/git-source</span></td><td><span>Fast-Pool</span></td><td><span>Recordsize=64k, LZ4 压缩。</span></td></tr><tr><td><span>编译缓存</span></td><td><span>fast-pool/sccache</span></td><td><span>Fast-Pool</span></td><td><span>Deduplication=on (视 CPU 性能)。</span></td></tr><tr><td><span>LFS 资产</span></td><td><span>asset-pool/gitlab-lfs</span></td><td><span>Asset-Pool</span></td><td><span>Recordsize=1M, 异步写入。</span></td></tr><tr><td><span>MinIO 对象存储</span></td><td><span>asset-pool/minio</span></td><td><span>Asset-Pool</span></td><td><span>Recordsize=1M, LZ4 压缩, 配额 8TB, 每日快照保留 7 天。</span></td></tr><tr><td><span>外部镜像</span></td><td><span>mirror-pool/external</span></td><td><span>Mirror-Pool</span></td><td><span>Compression=ZSTD, 权限只读。</span></td></tr></tbody></table></figure><h4 id='子网规划'><span>子网规划</span></h4><p><span>另外，根据节点角色不同，网路（包括物理网卡和虚拟网卡）需要划分为多个 VLAN。主要原因在于：</span></p><ol start='' ><li><p><span>像 Ops Server 和 NAS 之间的链路，存在数据量极大的情况，如果使用同一链路，将严重影响节点的性能。</span></p></li><li><p><span>环境隔离。这里隔离不仅是让测试区、开发区与核心服务之间流量互不干扰，更是防止网络一部分异常导致网络整体瘫痪，甚至无法维护。因此，一台物理机可能需要多个 IP 地址。</span></p></li></ol><p><span>这里我们把内网分为 5 个 VLAN:</span></p><ol start='' ><li><p><span>VLAN 10: iSCSI/SAN 链路。只包含 NAS 和 Ops Server，供 PVE 宿主机挂载 TrueNAS 的磁盘。</span>
+<span>因为我们存储的不仅包括 Pip 镜像源这种带有大量琐碎文件的文件夹，更包括编译结果这类庞大又频繁读取的二进制文件，因此在这个 VLAN 中，需要全局开启巨型帧，使用万兆线，降低 CPU 处理开销，同时确保数据隔离。</span></p></li><li><p><span>VLAN 20: 开发区。包括所有开发者的开发机，主要执行分布式编译、拉取第三方库、下载依赖包等操作。要求不高。</span></p></li><li><p><span>VLAN 30: 测试区。包括三类测试节点：Docker Cluster, ESXi/PVE VMs Cluster, Bare Metals. 主要出口流量为编译、测试结果。视情况也可与 VLAN 20 合并。</span></p></li><li><p><span>VLAN 40: 核心服务农场。为虚拟化网段，托管从权限管理到节点状态检测的所有服务，通过 Traefik 实现服务自动发现与边缘路由，是整个内网流量的汇聚点。</span></p></li><li><p><span>VLAN 99: 管理区。仅供运维使用，包含 NAS, PVE, 交换机控制台，用于网络故障诊断。</span></p></li></ol><p><span>我们使用标准的 C 类私有地址 192.168.x.0/24，其中 x 直接对应 VLAN ID，方便记忆：</span></p><figure class='table-figure'><table><thead><tr><th><span>VLAN ID</span></th><th><span>用途说明</span></th><th><span>网段 (CIDR)</span></th><th><span>网关 IP</span></th><th><span>掩码</span></th><th><span>核心策略</span></th></tr></thead><tbody><tr><td><span>VLAN 10</span></td><td><span>SAN Storage (存储专用)</span></td><td><span>10.10.10.0/24</span></td><td><span>无 (不配置)</span></td><td><span>/24</span></td><td><span>MTU 9000。物理隔离，无路由，仅 PVE 和 NAS 互联。</span></td></tr><tr><td><span>VLAN 20</span></td><td><span>Dev Zone (开发区)</span></td><td><span>10.20.0.0/20</span></td><td><span>.1</span></td><td><span>/20</span></td><td><span>核心办公区。DHCP 动态分配，涵盖 10.20.0.x ~ 10.20.15.x，允许访问 VLAN 40。</span></td></tr><tr><td><span>VLAN 30</span></td><td><span>Test Zone (测试区)</span></td><td><span>10.30.0.0/20</span></td><td><span>.1</span></td><td><span>/20</span></td><td><span>测试机群/Docker 节点。DHCP 租期较短。DHCP 自动分配，涵盖 10.30.0.x ~ 10.30.15.x，访问受限，允许访问 VLAN 40 个别服务。</span></td></tr><tr><td><span>VLAN 40</span></td><td><span>Server Farm (服务区)</span></td><td><span>10.40.40.0/24</span></td><td><span>.1</span></td><td><span>/24</span></td><td><span>全静态 IP。核心服务器和 VM 所在地，不需要太大，保持精简。</span></td></tr><tr><td><span>VLAN 99</span></td><td><span>OOB Mgmt (带外管理)</span></td><td><span>10.99.99.0/24</span></td><td><span>.1</span></td><td><span>/24</span></td><td><span>全静态 IP。仅管理员接入。</span></td></tr></tbody></table></figure><p><span>VLAN 20 和 VLAN 30 这两个大网段包含了 4096 个地址，足够所有同事的所有设备使用，我们采用分层切片的策略，避免 IP 乱用导致管理混乱。以 VLAN 20 (Dev Zone) 为例 (10.20.0.0/20)：</span></p><figure class='table-figure'><table><thead><tr><th><span>IP 范围</span></th><th><span>用途</span></th><th><span>备注</span></th></tr></thead><tbody><tr><td><span>10.20.0.1</span></td><td><span>网关 (Gateway)</span></td><td><span>核心交换机虚接口 (SVI)</span></td></tr><tr><td><span>10.20.0.2 - 10.20.0.9</span></td><td><span>网络设备</span></td><td><span>二层接入交换机、无线 AP 的管理地址</span></td></tr><tr><td><span>10.20.0.10 - 10.20.0.254</span></td><td><span>静态预留</span></td><td><span>留给打印机、门禁、考勤机、特殊工控机</span></td></tr><tr><td><span>10.20.1.0 - 10.20.14.254</span></td><td><span>DHCP 动态池</span></td><td><span>员工终端池 (约 3500 个 IP)。办公电脑、手机、开发机。</span></td></tr><tr><td><span>10.20.15.0 - 10.20.15.254</span></td><td><span>VIP / 临时</span></td><td><span>预留给访客网络或临时扩容</span></td></tr></tbody></table></figure><p><span>VLAN 30 (Test Zone) 遵循同样的逻辑 (10.30.0.1 为网关，10.30.1.x 开始为 DHCP)。</span></p><figure class='table-figure'><table><thead><tr><th><span>设备名称</span></th><th><span>主机名</span></th><th><span>角色</span></th><th><span>管理口 IP (VLAN 99)</span></th><th><span>存储口 IP (VLAN 10)</span></th><th><span>业务口 IP (VLAN 40)</span></th></tr></thead><tbody><tr><td><span>Net-01</span></td><td><span>switch-core</span></td><td><span>核心交换机</span></td><td><span>10.99.99.2</span></td><td><span>-</span></td><td><span>10.40.40.1</span></td></tr><tr><td><span>P-01</span></td><td><span>nas-core</span></td><td><span>TrueNAS 存储</span></td><td><span>10.99.99.10</span></td><td><span>10.10.10.10</span></td><td><span>10.40.40.5</span></td></tr><tr><td><span>P-02</span></td><td><span>pve-core</span></td><td><span>PVE 宿主机</span></td><td><span>10.99.99.20</span></td><td><span>10.10.10.20</span></td><td><span>10.40.40.6</span></td></tr><tr><td><span>VM-01</span></td><td><span>win-infra</span></td><td><span>Windows 基础服务</span></td><td><span>-</span></td><td><span>-</span></td><td><span>10.40.40.10</span></td></tr><tr><td><span>VM-02</span></td><td><span>gitlab-core</span></td><td><span>GitLab 核心</span></td><td><span>-</span></td><td><span>-</span></td><td><span>10.40.40.20</span></td></tr><tr><td><span>VM-03</span></td><td><span>jfrog-art</span></td><td><span>JFrog 资产</span></td><td><span>-</span></td><td><span>-</span></td><td><span>10.40.40.30</span></td></tr><tr><td><span>VM-04</span></td><td><span>linux-apps</span></td><td><span>Linux 应用</span></td><td><span>-</span></td><td><span>-</span></td><td><span>10.40.40.40</span></td></tr></tbody></table></figure><p><span>这样，在开发区同事看来，每个系统只有一张网卡，拥有唯一的 IP 地址——尽管它们可能含有多个虚拟机或者处于多个 VLAN 内。稍后的核心服务中的 DNS 一节将为这些地址添加内网域名。当 1000 台电脑接入网络时，AD/DHCP 应当自动注册以下格式的主机名，以便溯源：</span></p><ul><li><p><span>开发机: </span><code>dev-{部门 ID}-{员工 ID}.coca.local</code><span> (例如: </span><code>dev-core-nekomiya.coca.local</code><span> -&gt; 解析为 </span><code>10.20.x.x</code><span>)</span></p></li><li><p><span>测试机: </span><code>test-{资产编号}.coca.local</code><span> (例如: </span><code>test-001.coca.local</code><span> -&gt; 解析为 </span><code>10.30.x.x</code><span>)</span></p></li></ul><p><span>同时这些也是域名。尽管我们使用 DHCP 服务，但在 DHCP 服务器上根据 MAC 地址分配固定的 IP 地址，以方便审计。</span></p><h2 id='核心服务层'><span>核心服务层</span></h2><h3 id='着眼点-2'><span>着眼点</span></h3><p><span>在物理基础设施之上，服务层是整个研发体系的数据源和数据交换核心。鉴于此前服务随处乱跑、配置无法追溯、故障无法定位的痛点，本层设计遵循以下原则：</span></p><ol start='' ><li><p><span>一切皆容器。除极少数强依赖 Windows 内核的服务（如 AD/WSUS）外，其余所有服务（Traefik, Keycloak, Docs, Monitoring 等）强制运行在 Docker Swarm 集群中, 确保了服务环境的一致性，方便服务的迁移、升级、回滚等操作。</span></p></li><li><p><span>配置与数据分离，分为三部分：</span></p><ol start='' ><li><p><span>镜像。镜像是无状态的，随时可以从外网更新或重新构建。作为 Docker 镜像，服务镜像也通过 JFrog Container Registry 保留历史版本。</span></p></li><li><p><span>配置。配置文件通过 GitLab 进行版本控制，通过 Ansible 或 Docker Configs 下发。</span></p></li><li><p><span>数据。严禁存储在容器内部。所有持久化数据（如数据库文件、附件、日志）必须挂载至 TrueNAS 提供的 NFS/iSCSI 卷或 MinIO 对象存储中。</span></p></li></ol></li><li><p><span>统一接入与观测。不再允许通过 IP:Port 裸奔访问服务。所有 HTTP/TCP 流量必须经过 Traefik 网关，通过内网域名（如 git.corp.local）访问。所有服务必须暴露 Prometheus Metrics 接口，日志统一收集至 Loki/Grafana，确保故障发生时有迹可循。</span></p></li></ol><h3 id='架构设计-2'><span>架构设计</span></h3><p><span>服务层逻辑架构采用 Hub-Spoke 模式，以流量网关和身份认证为中心，驱动各个功能服务组。</span></p><h3 id='dns-服务规划'><span>DNS 服务规划</span></h3><p><span>为了方便管理 10~1000 台设备，域名命名规范必须具备层级性：</span></p><ol start='' ><li><p><span>根域名：coca.local， 指向 10.40.40.40 (Traefik 网关)</span></p></li><li><p><span>开发机与测试机域名：</span></p><ol start='' ><li><p><span>dev-{部门 ID}-{员工 ID}.coca.local (例如: dev-core-nekomiya.coca.local -&gt; 解析为 10.20.x.x)</span></p></li><li><p><span>test-{资产编号}.coca.local (例如: test-001.coca.local -&gt; 解析为 10.30.x.x)</span></p></li></ol></li></ol><p><span>其他服务以表格形式在这里给出：</span></p><ol start='' ><li><p><span>身份认证与网络基础设施：</span></p><figure class='table-figure'><table><thead><tr><th><span>序号</span></th><th><span>服务名称</span></th><th><span>完整域名 (FQDN)</span></th><th><span>功能说明</span></th><th><span>IP 地址</span></th><th><span>DNS 配置备注</span></th></tr></thead><tbody><tr><td><span>1</span></td><td><span>Traefik</span></td><td><span>traefik.coca.local</span></td><td><span>边缘网关，所有 HTTP 流量入口，自动服务发现。</span></td><td><span>10.40.40.40</span></td><td><span>A 记录；</span><span>*</span><span>.coca.local CNAME 到此</span></td></tr><tr><td><span>2</span></td><td><span>Keycloak (SSO)</span></td><td><span>sso.coca.local</span></td><td><span>统一身份验证入口 (LDAP/OIDC)，对接 AD。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>3</span></td><td><span>Windows AD</span></td><td><span>ad.coca.local</span></td><td><span>Windows 活动目录，管理 50+ 开发者身份。</span></td><td><span>10.40.40.10</span></td><td><span>A 记录；SRV 记录 </span><span>_</span><span>ldap.</span><span>_</span><span>tcp</span></td></tr><tr><td><span>4</span></td><td><span>DNS (PowerDNS)</span></td><td><span>dns.coca.local</span></td><td><span>内网 .coca.local 域名解析服务。</span></td><td><span>10.40.40.10</span></td><td><span>A 记录；所有客户端 DNS 指向此</span></td></tr><tr><td><span>5</span></td><td><span>PowerDNS Admin</span></td><td><span>dns-admin.coca.local</span></td><td><span>可视化内网域名管理后台。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>6</span></td><td><span>DHCP</span></td><td><span>-</span></td><td><span>跨 VLAN 动态 IP 分配，配合 AD 自动注册主机名。</span></td><td><span>10.40.40.10</span></td><td><span>无需 DNS 记录</span></td></tr><tr><td><span>7</span></td><td><span>TFTP</span></td><td><span>-</span></td><td><span>PXE 网络引导文件传输。</span></td><td><span>10.40.40.10</span></td><td><span>无需 DNS 记录</span></td></tr><tr><td><span>8</span></td><td><span>iPXE Server</span></td><td><span>pxe.coca.local</span></td><td><span>自动化装机与 VHDX 网络引导菜单。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>9</span></td><td><span>WSUS</span></td><td><span>wsus.coca.local</span></td><td><span>Windows 补丁和更新分发管理。</span></td><td><span>10.40.40.10</span></td><td><span>A 记录</span></td></tr><tr><td><span>10</span></td><td><span>Stalwart Mail</span></td><td><span>mail.coca.local</span></td><td><span>内网邮件服务器，发送 Git/CI 通知。</span></td><td><span>10.40.40.40</span></td><td><span>A 记录；MX 记录</span></td></tr></tbody></table></figure></li><li><p><span>编译与测试流水线：</span></p><figure class='table-figure'><table><thead><tr><th><span>序号</span></th><th><span>服务名称</span></th><th><span>完整域名 (FQDN)</span></th><th><span>功能说明</span></th><th><span>IP 地址</span></th><th><span>DNS 配置备注</span></th></tr></thead><tbody><tr><td><span>1</span></td><td><span>GitLab Runner</span></td><td><span>runner.coca.local</span></td><td><span>CI/CD 任务执行器状态监控。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>2</span></td><td><span>Jenkins</span></td><td><span>jenkins.coca.local</span></td><td><span>备用 CI/CD 引擎，复杂流水线编排。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>3</span></td><td><span>MinIO (S3)</span></td><td><span>s3.coca.local</span></td><td><span>sccache 全局编译缓存后端，S3 兼容接口。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>4</span></td><td><span>MinIO Console</span></td><td><span>oss.coca.local</span></td><td><span>MinIO 存储管理后台。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>5</span></td><td><span>Icecream Scheduler</span></td><td><span>distcc.coca.local</span></td><td><span>分布式编译集群调度中心。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>6</span></td><td><span>SonarQube</span></td><td><span>sonar.coca.local</span></td><td><span>代码静态分析与质量扫描。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>12</span></td><td><span>Sentry</span></td><td><span>sentry.coca.local</span></td><td><span>自建错误追踪与性能监控平台。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>13</span></td><td><span>Symbol Server</span></td><td><span>pdb.coca.local</span></td><td><span>Windows PDB 符号服务器。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr></tbody></table></figure></li><li><p><span>协作与通信：</span></p><figure class='table-figure'><table><thead><tr><th><span>序号</span></th><th><span>服务名称</span></th><th><span>完整域名 (FQDN)</span></th><th><span>功能说明</span></th><th><span>IP 地址</span></th><th><span>DNS 配置备注</span></th></tr></thead><tbody><tr><td><span>1</span></td><td><span>GitLab</span></td><td><span>git.coca.local</span></td><td><span>核心代码托管、代码审查、CI/CD 中心。</span></td><td><span>10.40.40.20</span></td><td><span>A 记录</span></td></tr><tr><td><span>2</span></td><td><span>Mattermost</span></td><td><span>chat.coca.local</span></td><td><span>替代企业微信的开源内网聊天工具。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>3</span></td><td><span>Outline</span></td><td><span>docs.coca.local</span></td><td><span>团队知识库、技术 Spec 文档中心。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>4</span></td><td><span>Wiki.js</span></td><td><span>wiki.coca.local</span></td><td><span>备用 Wiki 系统，Markdown 文档协作。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>5</span></td><td><span>ZenTao (禅道)</span></td><td><span>pm.coca.local</span></td><td><span>项目进度、Bug 跟踪、需求管理。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>6</span></td><td><span>Nextcloud</span></td><td><span>cloud.coca.local</span></td><td><span>内网文件共享与协作平台。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr></tbody></table></figure></li><li><p><span>镜像与制品管理：</span></p><figure class='table-figure'><table><thead><tr><th><span>序号</span></th><th><span>服务名称</span></th><th><span>完整域名 (FQDN)</span></th><th><span>功能说明</span></th><th><span>IP 地址</span></th><th><span>DNS 配置备注</span></th></tr></thead><tbody><tr><td><span>1</span></td><td><span>JFrog Artifactory</span></td><td><span>jfrog.coca.local</span></td><td><span>制品库主入口 (Conan/Generic/Maven)。</span></td><td><span>10.40.40.30</span></td><td><span>A 记录</span></td></tr><tr><td><span>2</span></td><td><span>JFrog Container Registry</span></td><td><span>docker.coca.local</span></td><td><span>私有 Docker 镜像仓库。</span></td><td><span>10.40.40.30</span></td><td><span>A 记录</span></td></tr><tr><td><span>3</span></td><td><span>Ubuntu APT Mirror</span></td><td><span>mirror.coca.local/ubuntu</span></td><td><span>Ubuntu 系统更新源镜像。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>4</span></td><td><span>Kylin APT Mirror</span></td><td><span>mirror.coca.local/kylin</span></td><td><span>麒麟系统更新源镜像。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>5</span></td><td><span>PyPI Mirror</span></td><td><span>mirror.coca.local/pypi</span></td><td><span>Python 依赖包镜像 (Bandersnatch)。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>6</span></td><td><span>NPM Mirror</span></td><td><span>mirror.coca.local/npm</span></td><td><span>NPM 镜像 (Verdaccio)。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>7</span></td><td><span>NuGet Mirror</span></td><td><span>mirror.coca.local/nuget</span></td><td><span>C# / .NET 依赖包镜像。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>8</span></td><td><span>VS Layout</span></td><td><span>mirror.coca.local/vs</span></td><td><span>Visual Studio 离线安装布局仓库。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>9</span></td><td><span>WSUS Mirror</span></td><td><span>wsus.coca.local</span></td><td><span>Windows 更新服务器。</span></td><td><span>10.40.40.10</span></td><td><span>A 记录</span></td></tr><tr><td><span>10</span></td><td><span>WinGet Mirror</span></td><td><span>mirror.coca.local/winget</span></td><td><span>Windows 软件安装源镜像。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>11</span></td><td><span>Open VSX</span></td><td><span>mirror.coca.local/vsx</span></td><td><span>VS Code 插件市场私有化镜像。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr></tbody></table></figure></li><li><p><span>开发辅助工具：</span></p><figure class='table-figure'><table><thead><tr><th><span>序号</span></th><th><span>服务名称</span></th><th><span>完整域名 (FQDN)</span></th><th><span>功能说明</span></th><th><span>IP 地址</span></th><th><span>DNS 配置备注</span></th></tr></thead><tbody><tr><td><span>1</span></td><td><span>Compiler Explorer</span></td><td><span>ce.coca.local</span></td><td><span>离线版，实时 C++ 汇编分析与优化。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>2</span></td><td><span>SourceGraph</span></td><td><span>search.coca.local</span></td><td><span>全局代码搜索与交叉引用导航。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>3</span></td><td><span>Doxygen</span></td><td><span>docs-api.coca.local</span></td><td><span>自动化生成的 C++ API 文档展示站。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>4</span></td><td><span>Swagger UI</span></td><td><span>swagger.coca.local</span></td><td><span>REST API 文档与调试界面。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>5</span></td><td><span>Draw.io</span></td><td><span>draw.coca.local</span></td><td><span>离线流程图/架构图绘制工具。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>6</span></td><td><span>Excalidraw</span></td><td><span>excalidraw.coca.local</span></td><td><span>手绘风格白板协作工具。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>7</span></td><td><span>DevDocs</span></td><td><span>devdocs.coca.local</span></td><td><span>离线开发文档聚合浏览器。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>8</span></td><td><span>Kiwix (Stack Overflow)</span></td><td><span>kiwix.coca.local</span></td><td><span>Stack Overflow 离线镜像。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>9</span></td><td><span>IT-Tools</span></td><td><span>tools.coca.local</span></td><td><span>开发者常用在线工具集合。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>10</span></td><td><span>Shader Playpen</span></td><td><span>shader.coca.local</span></td><td><span>着色器在线编辑与预览。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr></tbody></table></figure></li><li><p><span>运维与监控：</span></p><figure class='table-figure'><table><thead><tr><th><span>序号</span></th><th><span>服务名称</span></th><th><span>完整域名 (FQDN)</span></th><th><span>功能说明</span></th><th><span>IP 地址</span></th><th><span>DNS 配置备注</span></th></tr></thead><tbody><tr><td><span>1</span></td><td><span>Grafana</span></td><td><span>monitor.coca.local</span></td><td><span>监控大屏，通览所有服务器状态。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>2</span></td><td><span>Prometheus</span></td><td><span>prom.coca.local</span></td><td><span>时序指标数据采集与存储。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>3</span></td><td><span>Grafana Phlare</span></td><td><span>phlare.coca.local</span></td><td><span>持续性能剖析 (Continuous Profiling)。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>4</span></td><td><span>Loki</span></td><td><span>loki.coca.local</span></td><td><span>轻量级日志聚合系统。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>5</span></td><td><span>ELK Stack</span></td><td><span>elk.coca.local</span></td><td><span>Elasticsearch/Logstash/Kibana 日志分析。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>6</span></td><td><span>Uptime Kuma</span></td><td><span>status.coca.local</span></td><td><span>服务可用性监控（绿灯/红灯看板）。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>7</span></td><td><span>Portainer</span></td><td><span>portainer.coca.local</span></td><td><span>可视化管理 Docker Swarm 集群。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>8</span></td><td><span>NetBox</span></td><td><span>net.coca.local</span></td><td><span>IP 地址、资产、机架位管理。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>9</span></td><td><span>Ansible Semaphore</span></td><td><span>ansible.coca.local</span></td><td><span>Ansible 可视化任务调度与执行。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>10</span></td><td><span>Terraform</span></td><td><span>-</span></td><td><span>基础设施即代码 (CLI)。</span></td><td><span>-</span></td><td><span>无需 DNS</span></td></tr><tr><td><span>11</span></td><td><span>Vault</span></td><td><span>vault.coca.local</span></td><td><span>密钥与敏感配置管理。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>12</span></td><td><span>Adminer</span></td><td><span>adminer.coca.local</span></td><td><span>轻量级数据库管理界面。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>13</span></td><td><span>RedisInsight</span></td><td><span>redis.coca.local</span></td><td><span>Redis 可视化管理工具。</span></td><td><span>10.40.40.40</span></td><td><span>CNAME -&gt; traefik</span></td></tr><tr><td><span>15</span></td><td><span>TrueNAS Scale</span></td><td><span>nas.coca.local</span></td><td><span>存储管理界面。</span></td><td><span>10.40.40.5</span></td><td><span>A 记录</span></td></tr><tr><td><span>16</span></td><td><span>Proxmox VE</span></td><td><span>pve.coca.local</span></td><td><span>虚拟化平台管理界面。</span></td><td><span>10.40.40.6</span></td><td><span>A 记录</span></td></tr></tbody></table></figure></li></ol><h3 id='外网同步内容'><span>外网同步内容</span></h3><ol start='' ><li><p><span>Apt/Kylin 源，Pip 源，NPM 源, openvsx，winget</span></p></li><li><p><span>VS、系统更新、resharper</span></p></li><li><p><span>部分关键源码</span></p></li><li><p><span>新的系统镜像</span></p></li></ol><h1 id='核心服务结构'><span>核心服务结构</span></h1><h2 id='minio-对象存储设计'><span>MinIO 对象存储设计</span></h2><p><span>在核心服务层中，我们已经提到&quot;所有持久化数据必须挂载至 TrueNAS 提供的 NFS/iSCSI 卷或 MinIO 对象存储中&quot;。NFS/iSCSI 适合数据库文件、Git 仓库等 POSIX 语义的块/文件存储，而 MinIO 则负责所有 </span><strong><span>非结构化二进制数据</span></strong><span> 的统一管理——它提供 S3 兼容 API，天然适合海量 Blob 的存储、生命周期管理和跨服务共享。</span></p><h3 id='着眼点-3'><span>着眼点</span></h3><p><span>为什么需要独立的对象存储层，而不是全部挂 NFS？</span></p><ol start='' ><li><p><strong><span>生命周期管理</span></strong><span>。编译缓存 7 天过期、CI 制品 90 天归档、备份 180 天轮转——这些策略在 NFS 上需要自己写 cron + find，而 MinIO 原生支持 ILM (Information Lifecycle Management) 规则，声明式配置即可。</span></p></li><li><p><strong><span>多服务统一接入</span></strong><span>。GitLab、Loki、Sentry、sccache 均原生支持 S3 后端，无需为每个服务单独挂载 NFS 卷和管理权限，统一通过 Access Key 鉴权。</span></p></li><li><p><strong><span>水平扩展</span></strong><span>。当数据量增长时，MinIO 支持 Erasure Coding 和多节点扩展，而 NFS 的扩展路径（增加 HDD → 换更大 NAS → 分布式 NFS）远不如对象存储灵活。</span></p></li><li><p><strong><span>不可变性</span></strong><span>。制品、备份等数据写入后不应被修改，MinIO 支持 Object Lock (WORM)，可以从存储层面防止误删和篡改。</span></p></li></ol><h3 id='部署架构'><span>部署架构</span></h3><p><span>MinIO 部署在 VM-04 (linux-apps) 上，以 Docker 容器方式运行，数据目录挂载到 TrueNAS 的 Asset-Pool：</span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="" style="break-inside: unset;"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51875px; left: 8px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">┌─────────────────────────────────────────────────────────────────┐</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  VM-04 (linux-apps) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  ┌──────────────┐ &nbsp; &nbsp; ┌──────────────┐ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  │ MinIO Server │────→│ MinIO Console│ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  │ :9000 (API)  │ &nbsp; &nbsp; │ :9001 (Web)  │ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  └──────┬───────┘ &nbsp; &nbsp; └──────────────┘ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│ &nbsp; &nbsp; &nbsp; &nbsp; │ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│ &nbsp; &nbsp; &nbsp; &nbsp; │  S3 API &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  ┌──────┴──────────────────────────────────────────────┐ &nbsp; &nbsp; &nbsp;  │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  │  Consumers: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  │ &nbsp; &nbsp; &nbsp;  │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  │  • GitLab (LFS, Uploads) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; │ &nbsp; &nbsp; &nbsp;  │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  │  • JFrog (Conan 包, Docker 镜像层, CI 制品, 备份) &nbsp; │ &nbsp; &nbsp; &nbsp;  │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  │  • sccache (分布式编译缓存) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  │ &nbsp; &nbsp; &nbsp;  │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  │  • Loki (日志 chunk 存储) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  │ &nbsp; &nbsp; &nbsp;  │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  │  • Sentry (crash dump / attachments) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  │ &nbsp; &nbsp; &nbsp;  │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  │  • Nextcloud (文件 Blob) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  │ &nbsp; &nbsp; &nbsp;  │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  │  • Backup Scripts (GitLab/JFrog 备份归档) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; │ &nbsp; &nbsp; &nbsp;  │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  └─────────────────────────────────────────────────────┘ &nbsp; &nbsp; &nbsp;  │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│ &nbsp; &nbsp; &nbsp; &nbsp; │ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│ &nbsp; &nbsp; &nbsp; &nbsp; ▼  NFS mount &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  /mnt/asset-pool/minio-data/ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">└─────────────────────────────────────────────────────────────────┘</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; ▼  NFS over VLAN 10</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">┌─────────────────────────────────────────────────────────────────┐</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  P-01 (TrueNAS) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  asset-pool/minio &nbsp; &nbsp; &nbsp; ← RAID-Z2 HDD + Special VDEV SSD &nbsp; &nbsp;  │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">│  asset-pool/minio-warm  ← (可选) 冷数据分层 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; │</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">└─────────────────────────────────────────────────────────────────┘</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 691px;"></div><div class="CodeMirror-gutters" style="display: none; height: 691px;"></div></div></div></pre><p><span>MinIO 单节点 Single-Drive 模式足以满足当前 50 人团队的需求。当未来数据量超过 10TB 或并发压力增大时，可以平滑迁移到 Erasure Coding 模式（最少 4 块盘）。</span></p><h3 id='bucket-结构与数据分类'><span>Bucket 结构与数据分类</span></h3><p><span>根据数据特征（生命周期、访问频率、重要性），我们将 MinIO 划分为以下 Bucket：</span></p><figure class='table-figure'><table><thead><tr><th><span>Bucket 名称</span></th><th><span>数据内容</span></th><th><span>写入模式</span></th><th><span>访问频率</span></th><th><span>重要性</span></th><th><span>存储池</span></th></tr></thead><tbody><tr><td><code>sccache</code></td><td><span>分布式编译缓存 (ccache/sccache)</span></td><td><span>高频小文件写入</span></td><td><span>极高</span></td><td><span>低（可重建）</span></td><td><span>Asset-Pool</span></td></tr><tr><td><code>gitlab-lfs</code></td><td><span>Git LFS 大文件（模型、测试数据、大型资源）</span></td><td><span>低频大文件写入</span></td><td><span>中</span></td><td><span>高</span></td><td><span>Asset-Pool</span></td></tr><tr><td><code>gitlab-uploads</code></td><td><span>GitLab 用户上传（Issue 附件、MR 截图等）</span></td><td><span>低频</span></td><td><span>低</span></td><td><span>中</span></td><td><span>Asset-Pool</span></td></tr><tr><td><code>jfrog-filestore</code></td><td><span>JFrog Artifactory 二进制存储后端（Conan 包、Docker 镜像层、CI/CD 流水线制品、Generic 制品）</span></td><td><span>CI 上传 + 开发者拉取</span></td><td><span>高</span></td><td><span>极高</span></td><td><span>Asset-Pool</span></td></tr><tr><td><code>jfrog-backups</code></td><td><span>JFrog 系统配置导出、数据库 dump</span></td><td><span>每日/每周批量写入</span></td><td><span>极低</span></td><td><span>极高</span></td><td><span>Asset-Pool</span></td></tr><tr><td><code>loki-chunks</code></td><td><span>Grafana Loki 日志数据块</span></td><td><span>持续追加写入</span></td><td><span>高</span></td><td><span>中</span></td><td><span>Asset-Pool</span></td></tr><tr><td><code>sentry-attachments</code></td><td><span>Sentry 崩溃转储、附件</span></td><td><span>事件触发</span></td><td><span>低</span></td><td><span>中</span></td><td><span>Asset-Pool</span></td></tr><tr><td><code>backups</code></td><td><span>GitLab 定时备份归档（全量备份、配置、数据库 dump）</span></td><td><span>每日/每周批量写入</span></td><td><span>极低</span></td><td><span>极高</span></td><td><span>Asset-Pool</span></td></tr><tr><td><code>nextcloud-data</code></td><td><span>Nextcloud 文件共享 Blob</span></td><td><span>用户驱动</span></td><td><span>中</span></td><td><span>高</span></td><td><span>Asset-Pool</span></td></tr></tbody></table></figure><blockquote><p><strong><span>说明</span></strong><span>：Conan 包管理、Docker 私有镜像仓库和 CI/CD 流水线制品（测试报告、覆盖率、构建产物）均由 JFrog Artifactory 承载——分别对应 Conan 仓库（</span><code>jfrog.coca.local</code><span>）、Container Registry（</span><code>docker.coca.local</code><span>）和 Generic 仓库。不使用 GitLab Package Registry 和 Dependency Proxy。JFrog 的 </span><code>filestore</code><span> 配置为 S3 后端，将所有二进制数据统一存入 MinIO 的 </span><code>jfrog-filestore</code><span> bucket，JFrog 自身只保留元数据索引，实现存储与服务的解耦。</span></p></blockquote><h3 id='生命周期策略-ilm'><span>生命周期策略 (ILM)</span></h3><p><span>通过 MinIO 的 ILM 规则，自动管理数据的过期和清理，避免存储无限膨胀：</span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="bash" style="break-inside: unset;"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51875px; left: 8px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># 安装 mc (MinIO Client)</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc alias <span class="cm-keyword">set</span> coca http://s3.coca.local:9000 &lt;access_key&gt; &lt;secret_key&gt;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># sccache: 编译缓存 7 天过期，可重建，激进清理</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc ilm rule add coca/sccache \</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-attribute">--expiry-days</span> <span class="cm-number">7</span> \</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-attribute">--noncurrent-expiry-days</span> <span class="cm-number">1</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># gitlab-lfs: LFS 对象不过期，但非当前版本 180 天后清理</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc ilm rule add coca/gitlab-lfs \</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-attribute">--noncurrent-expiry-days</span> <span class="cm-number">180</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># gitlab-uploads: 用户上传 365 天过期</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc ilm rule add coca/gitlab-uploads \</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-attribute">--expiry-days</span> <span class="cm-number">365</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># jfrog-filestore: 由 JFrog 自身的清理策略管理（jfrog-cleanup.sh），MinIO 侧不设过期</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># 仅清理非当前版本（JFrog 删除后 MinIO 侧的残留标记）</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc ilm rule add coca/jfrog-filestore \</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-attribute">--noncurrent-expiry-days</span> <span class="cm-number">7</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># jfrog-backups: JFrog 备份保留策略</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc ilm rule add coca/jfrog-backups \</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-attribute">--prefix</span> <span class="cm-string">"daily/"</span> <span class="cm-attribute">--expiry-days</span> <span class="cm-number">30</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc ilm rule add coca/jfrog-backups \</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-attribute">--prefix</span> <span class="cm-string">"weekly/"</span> <span class="cm-attribute">--expiry-days</span> <span class="cm-number">180</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># loki-chunks: 日志保留 90 天</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc ilm rule add coca/loki-chunks \</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-attribute">--expiry-days</span> <span class="cm-number">90</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># sentry-attachments: 崩溃数据 180 天过期</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc ilm rule add coca/sentry-attachments \</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-attribute">--expiry-days</span> <span class="cm-number">180</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># backups: 备份保留策略</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># &nbsp; daily/ 前缀: 30 天</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># &nbsp; weekly/ 前缀: 180 天</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc ilm rule add coca/backups \</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-attribute">--prefix</span> <span class="cm-string">"daily/"</span> <span class="cm-attribute">--expiry-days</span> <span class="cm-number">30</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc ilm rule add coca/backups \</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-attribute">--prefix</span> <span class="cm-string">"weekly/"</span> <span class="cm-attribute">--expiry-days</span> <span class="cm-number">180</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># nextcloud-data: 不过期，由 Nextcloud 自身管理</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># (不设置 ILM 规则)</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 1037px;"></div><div class="CodeMirror-gutters" style="display: none; height: 1037px;"></div></div></div></pre><p><span>汇总视图：</span></p><figure class='table-figure'><table><thead><tr><th><span>Bucket</span></th><th><span>过期策略</span></th><th><span>Object Lock</span></th><th><span>版本控制</span></th><th><span>预估容量</span></th></tr></thead><tbody><tr><td><code>sccache</code></td><td><span>7 天</span></td><td><span>否</span></td><td><span>否</span></td><td><span>50~200 GB</span></td></tr><tr><td><code>gitlab-lfs</code></td><td><span>不过期（非当前版本 180 天）</span></td><td><span>否</span></td><td><span>是</span></td><td><span>500 GB~2 TB</span></td></tr><tr><td><code>gitlab-uploads</code></td><td><span>365 天</span></td><td><span>否</span></td><td><span>否</span></td><td><span>10~50 GB</span></td></tr><tr><td><code>jfrog-filestore</code></td><td><span>不过期（由 JFrog 清理策略管理）</span></td><td><span>是 (Governance)</span></td><td><span>是</span></td><td><span>2~8 TB</span></td></tr><tr><td><code>jfrog-backups</code></td><td><span>daily/ 30 天, weekly/ 180 天</span></td><td><span>是 (Compliance)</span></td><td><span>是</span></td><td><span>200 GB~1 TB</span></td></tr><tr><td><code>loki-chunks</code></td><td><span>90 天</span></td><td><span>否</span></td><td><span>否</span></td><td><span>50~200 GB</span></td></tr><tr><td><code>sentry-attachments</code></td><td><span>180 天</span></td><td><span>否</span></td><td><span>否</span></td><td><span>20~100 GB</span></td></tr><tr><td><code>backups</code></td><td><span>daily/ 30 天, weekly/ 180 天</span></td><td><span>是 (Compliance)</span></td><td><span>是</span></td><td><span>500 GB~2 TB</span></td></tr><tr><td><code>nextcloud-data</code></td><td><span>不过期</span></td><td><span>否</span></td><td><span>是</span></td><td><span>100~500 GB</span></td></tr></tbody></table></figure><p><span>总预估容量约 </span><strong><span>2.5~11 TB</span></strong><span>，在 Asset-Pool (RAID-Z2, ~36TB 净容量) 中占比约 7%~30%，留有充足余量。</span></p><h3 id='访问控制'><span>访问控制</span></h3><p><span>MinIO 使用独立于 AD/Keycloak 的 Access Key 体系（因为大部分消费者是服务而非人），按最小权限原则为每个服务创建专用凭据：</span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="bash" style="break-inside: unset;"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51875px; left: 8px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># 创建服务专用策略和用户</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># GitLab — 读写 gitlab-* bucket（LFS, Artifacts, Uploads）</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc admin policy create coca gitlab-policy /etc/minio/policies/gitlab.json</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc admin user add coca gitlab-svc &lt;password&gt;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc admin policy attach coca gitlab-policy <span class="cm-attribute">--user</span> gitlab-svc</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># JFrog — 读写 jfrog-filestore（S3 filestore 后端）+ 写入 jfrog-backups</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc admin policy create coca jfrog-policy /etc/minio/policies/jfrog.json</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc admin user add coca jfrog-svc &lt;password&gt;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc admin policy attach coca jfrog-policy <span class="cm-attribute">--user</span> jfrog-svc</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># sccache — 仅读写 sccache bucket</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc admin policy create coca sccache-policy /etc/minio/policies/sccache.json</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc admin user add coca sccache-svc &lt;password&gt;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc admin policy attach coca sccache-policy <span class="cm-attribute">--user</span> sccache-svc</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># Loki — 仅读写 loki-chunks bucket</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc admin policy create coca loki-policy /etc/minio/policies/loki.json</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc admin user add coca loki-svc &lt;password&gt;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc admin policy attach coca loki-policy <span class="cm-attribute">--user</span> loki-svc</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># Backup — 仅写入 backups bucket（不可删除，配合 Object Lock）</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc admin policy create coca backup-policy /etc/minio/policies/backup.json</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc admin user add coca backup-svc &lt;password&gt;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mc admin policy attach coca backup-policy <span class="cm-attribute">--user</span> backup-svc</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 576px;"></div><div class="CodeMirror-gutters" style="display: none; height: 576px;"></div></div></div></pre><p><span>策略文件示例（</span><code>/etc/minio/policies/sccache.json</code><span>）：</span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="json"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="json"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51875px; left: 8px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">{</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-string cm-property">"Version"</span>: <span class="cm-string">"2012-10-17"</span>,</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-string cm-property">"Statement"</span>: [</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;  {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-string cm-property">"Effect"</span>: <span class="cm-string">"Allow"</span>,</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-string cm-property">"Action"</span>: [<span class="cm-string">"s3:GetObject"</span>, <span class="cm-string">"s3:PutObject"</span>, <span class="cm-string">"s3:DeleteObject"</span>, <span class="cm-string">"s3:ListBucket"</span>],</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-string cm-property">"Resource"</span>: [<span class="cm-string">"arn:aws:s3:::sccache"</span>, <span class="cm-string">"arn:aws:s3:::sccache/*"</span>]</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;  }</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  ]</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 253px;"></div><div class="CodeMirror-gutters" style="display: none; height: 253px;"></div></div></div></pre><h3 id='与-truenas-存储池的映射'><span>与 TrueNAS 存储池的映射</span></h3><p><span>MinIO 的数据目录通过 NFS 挂载到 TrueNAS 的 Asset-Pool 上。在 TrueNAS 中创建专用 Dataset：</span></p><figure class='table-figure'><table><thead><tr><th><span>Dataset 路径</span></th><th><span>用途</span></th><th><span>Recordsize</span></th><th><span>压缩</span></th><th><span>配额</span></th><th><span>快照策略</span></th></tr></thead><tbody><tr><td><code>asset-pool/minio</code></td><td><span>MinIO 主数据目录</span></td><td><span>1M</span></td><td><span>LZ4</span></td><td><span>8 TB (软限)</span></td><td><span>每日快照，保留 7 天</span></td></tr></tbody></table></figure><blockquote><p><strong><span>说明</span></strong><span>：MinIO 内部以对象为单位存储，对象大小差异极大（sccache 几 KB ~ LFS 几 GB），选择 1M recordsize 是对大文件顺序写入的优化。小文件的额外空间浪费由 LZ4 压缩部分抵消。如果未来 sccache 的小文件 IOPS 成为瓶颈，可以将 sccache bucket 拆分到 Fast-Pool 的独立 Dataset（recordsize=64K）上。</span></p></blockquote><p><span>Docker Compose 挂载配置：</span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="yaml" style="break-inside: unset;"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="yaml"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51875px; left: 8px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># ~/coca-services/tier1-core/minio/docker-compose.yml</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom">services</span><span class="cm-meta">:</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom">  minio</span><span class="cm-meta">:</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp;  image</span><span class="cm-meta">: </span>minio/minio<span class="cm-meta">:</span>latest</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp;  container_name</span><span class="cm-meta">: </span>minio</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp;  command</span><span class="cm-meta">: </span>server /data --console-address <span class="cm-string">":9001"</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp;  environment</span><span class="cm-meta">:</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp; &nbsp;  MINIO_ROOT_USER</span><span class="cm-meta">: </span><span class="cm-string">"${MINIO_ROOT_USER}"</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp; &nbsp;  MINIO_ROOT_PASSWORD</span><span class="cm-meta">: </span><span class="cm-string">"${MINIO_ROOT_PASSWORD}"</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp; &nbsp;  MINIO_BROWSER_REDIRECT_URL</span><span class="cm-meta">: </span><span class="cm-string">"https://oss.coca.local"</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp; &nbsp;  MINIO_SERVER_URL</span><span class="cm-meta">: </span><span class="cm-string">"https://s3.coca.local"</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp;  volumes</span><span class="cm-meta">:</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta"> &nbsp; &nbsp;  - </span>/mnt/asset-pool/minio:/data</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp;  ports</span><span class="cm-meta">:</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta"> &nbsp; &nbsp;  - </span><span class="cm-string">"9000:9000"</span> &nbsp; <span class="cm-comment"># S3 API</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta"> &nbsp; &nbsp;  - </span><span class="cm-string">"9001:9001"</span> &nbsp; <span class="cm-comment"># Console</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp;  networks</span><span class="cm-meta">:</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta"> &nbsp; &nbsp;  - </span>traefik-public</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta"> &nbsp; &nbsp;  - </span>backend</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp;  labels</span><span class="cm-meta">:</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta"> &nbsp; &nbsp;  - </span><span class="cm-string">"traefik.enable=true"</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;<span class="cm-comment"># S3 API</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta"> &nbsp; &nbsp;  - </span><span class="cm-string">"traefik.http.routers.minio-api.rule=Host(`s3.coca.local`)"</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta"> &nbsp; &nbsp;  - </span><span class="cm-string">"traefik.http.routers.minio-api.service=minio-api"</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta"> &nbsp; &nbsp;  - </span><span class="cm-string">"traefik.http.services.minio-api.loadbalancer.server.port=9000"</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;<span class="cm-comment"># Console</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta"> &nbsp; &nbsp;  - </span><span class="cm-string">"traefik.http.routers.minio-console.rule=Host(`oss.coca.local`)"</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta"> &nbsp; &nbsp;  - </span><span class="cm-string">"traefik.http.routers.minio-console.service=minio-console"</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-meta"> &nbsp; &nbsp;  - </span><span class="cm-string">"traefik.http.services.minio-console.loadbalancer.server.port=9001"</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp;  deploy</span><span class="cm-meta">:</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp; &nbsp;  resources</span><span class="cm-meta">:</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp; &nbsp; &nbsp;  limits</span><span class="cm-meta">:</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp; &nbsp; &nbsp; &nbsp;  memory</span><span class="cm-meta">: </span>4G</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp;  healthcheck</span><span class="cm-meta">:</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp; &nbsp;  test</span><span class="cm-meta">: [</span><span class="cm-string">"CMD"</span><span class="cm-meta">,</span> <span class="cm-string">"mc"</span><span class="cm-meta">,</span> <span class="cm-string">"ready"</span><span class="cm-meta">,</span> <span class="cm-string">"local"</span><span class="cm-meta">]</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp; &nbsp;  interval</span><span class="cm-meta">: </span>30s</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp; &nbsp;  timeout</span><span class="cm-meta">: </span>10s</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp; &nbsp;  retries</span><span class="cm-meta">: </span><span class="cm-number">3</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-atom"> &nbsp;  restart</span><span class="cm-meta">: </span>unless-stopped</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 898px;"></div><div class="CodeMirror-gutters" style="display: none; height: 898px;"></div></div></div></pre><h3 id='各服务集成配置要点'><span>各服务集成配置要点</span></h3><figure class='table-figure'><table><thead><tr><th><span>服务</span></th><th><span>配置方式</span></th><th><span>关键参数</span></th></tr></thead><tbody><tr><td><strong><span>GitLab</span></strong></td><td><code>gitlab.rb</code><span> 中配置 </span><code>object_store</code></td><td><code>connection.endpoint = &quot;http://s3.coca.local:9000&quot;</code><span>, </span><code>consolidate = true</code><span>（仅 LFS、Uploads，CI 制品走 JFrog）</span></td></tr><tr><td><strong><span>JFrog Artifactory</span></strong></td><td><code>binarystore.xml</code><span> 配置 S3 filestore</span></td><td><code>&lt;provider id=&quot;s3-storage&quot;&gt;</code><span>, </span><code>endpoint: http://s3.coca.local:9000</code><span>, </span><code>bucketName: jfrog-filestore</code><span>；CI 制品通过 Generic 仓库 </span><code>ci-artifacts-local</code><span> 存储</span></td></tr><tr><td><strong><span>sccache</span></strong></td><td><span>环境变量</span></td><td><code>SCCACHE_BUCKET=sccache</code><span>, </span><code>SCCACHE_ENDPOINT=http://s3.coca.local:9000</code><span>, </span><code>SCCACHE_S3_USE_SSL=false</code></td></tr><tr><td><strong><span>Loki</span></strong></td><td><code>loki.yaml</code><span> 中 </span><code>storage_config.aws</code></td><td><code>s3: http://s3.coca.local:9000/loki-chunks</code><span>, </span><code>s3forcepathstyle: true</code></td></tr><tr><td><strong><span>Sentry</span></strong></td><td><code>sentry.conf.py</code><span> 中 </span><code>SENTRY_OPTIONS</code></td><td><code>filestore.backend: s3</code><span>, </span><code>filestore.options.bucket_name: sentry-attachments</code></td></tr><tr><td><strong><span>Nextcloud</span></strong></td><td><span>管理后台 → 外部存储</span></td><td><span>S3 兼容存储，bucket: </span><code>nextcloud-data</code></td></tr><tr><td><strong><span>Backup 脚本</span></strong></td><td><code>mc cp</code><span> / </span><code>aws s3 cp</code></td><td><span>GitLab: </span><code>mc cp ... coca/backups/daily/</code><span>; JFrog: </span><code>mc cp ... coca/jfrog-backups/daily/</code></td></tr></tbody></table></figure><h3 id='监控与告警'><span>监控与告警</span></h3><p><span>MinIO 原生暴露 Prometheus Metrics（</span><code>/minio/v2/metrics/cluster</code><span>），接入已有的 Grafana + Prometheus 监控栈：</span></p><figure class='table-figure'><table><thead><tr><th><span>指标</span></th><th><span>告警阈值</span></th><th><span>说明</span></th></tr></thead><tbody><tr><td><code>minio_cluster_disk_total_free_bytes</code></td><td><span>&lt; 20% 剩余</span></td><td><span>存储空间不足</span></td></tr><tr><td><code>minio_s3_requests_errors_total</code><span> (5xx)</span></td><td><span>&gt; 10/min</span></td><td><span>服务端错误激增</span></td></tr><tr><td><code>minio_node_process_uptime_seconds</code></td><td><span>= 0</span></td><td><span>MinIO 进程宕机</span></td></tr><tr><td><code>minio_bucket_usage_total_bytes</code><span> (per bucket)</span></td><td><span>超过预估容量 2x</span></td><td><span>某 bucket 异常增长</span></td></tr></tbody></table></figure><h3 id='容量规划与扩展路径'><span>容量规划与扩展路径</span></h3><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang=""><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51875px; left: 8px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">阶段 1 (当前, 50 人团队):</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  Single-Node Single-Drive</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  Asset-Pool NFS 挂载, 预估 2~4 TB</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  ↓</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">阶段 2 (100+ 人, 数据 &gt; 10 TB):</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  Single-Node Erasure Coding (4 drives)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  拆分热数据 (sccache) 到 Fast-Pool</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  ↓</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">阶段 3 (500+ 人, 数据 &gt; 50 TB):</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  Multi-Node Distributed MinIO</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  独立存储节点, 万兆互联</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  引入 MinIO Tiering (热→温→冷自动分层)</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 276px;"></div><div class="CodeMirror-gutters" style="display: none; height: 276px;"></div></div></div></pre><h2 id='二进制数据流转总览'><span>二进制数据流转总览</span></h2><p><span>综合 JFrog Artifactory（Conan 包 + Docker 镜像管理）和 MinIO（对象存储），公司的二进制数据按用途分为以下类别，各有明确的存储归属：</span></p><figure class='table-figure'><table><thead><tr><th><span>数据类型</span></th><th><span>管理入口</span></th><th><span>实际存储位置</span></th><th><span>管理方式</span></th><th><span>生命周期</span></th></tr></thead><tbody><tr><td><span>编译中间文件 (sccache/ccache)</span></td><td><span>sccache CLI</span></td><td><span>MinIO </span><code>sccache</code><span> bucket</span></td><td><span>ILM 自动过期</span></td><td><span>7 天</span></td></tr><tr><td><span>Conan 包 (带版本)</span></td><td><span>JFrog </span><code>conan-local</code></td><td><span>MinIO </span><code>jfrog-filestore</code><span> bucket (S3 后端)</span></td><td><span>jfrog-cleanup.sh 保留策略</span></td><td><span>保留最近 N 版本 + stable</span></td></tr><tr><td><span>Docker 私有镜像</span></td><td><span>JFrog Container Registry</span></td><td><span>MinIO </span><code>jfrog-filestore</code><span> bucket (S3 后端)</span></td><td><span>JFrog GC + 镜像 tag 策略</span></td><td><span>按 tag 策略保留</span></td></tr><tr><td><span>CI/CD 流水线制品</span></td><td><span>JFrog Generic 仓库 </span><code>ci-artifacts-local</code></td><td><span>MinIO </span><code>jfrog-filestore</code><span> bucket (S3 后端)</span></td><td><span>JFrog 清理策略</span></td><td><span>90 天（按路径前缀清理）</span></td></tr><tr><td><span>Git LFS 大文件</span></td><td><span>GitLab LFS</span></td><td><span>MinIO </span><code>gitlab-lfs</code><span> bucket</span></td><td><span>版本控制 + 非当前版本过期</span></td><td><span>当前版本永久, 旧版本 180 天</span></td></tr><tr><td><span>镜像源 (APT/PyPI/NPM)</span></td><td><span>静态文件服务 / JFrog Remote</span></td><td><span>NFS 或 JFrog 本地缓存</span></td><td><span>外网同步脚本定期更新</span></td><td><span>持续更新</span></td></tr><tr><td><span>GitLab 备份</span></td><td><span>backup 脚本</span></td><td><span>MinIO </span><code>backups</code><span> bucket (Object Lock)</span></td><td><span>ILM 分层过期</span></td><td><span>daily/ 30 天, weekly/ 180 天</span></td></tr><tr><td><span>JFrog 备份</span></td><td><span>backup 脚本</span></td><td><span>MinIO </span><code>jfrog-backups</code><span> bucket (Object Lock)</span></td><td><span>ILM 分层过期</span></td><td><span>daily/ 30 天, weekly/ 180 天</span></td></tr></tbody></table></figure><blockquote><p><strong><span>核心设计</span></strong><span>：JFrog Artifactory 的 </span><code>filestore</code><span> 配置为 S3 后端（指向 MinIO </span><code>jfrog-filestore</code><span> bucket），JFrog 自身数据库仅存储元数据索引。这意味着所有 Conan 包、Docker 镜像层和 CI/CD 流水线制品的实际二进制数据都统一存储在 MinIO 中，享受 Asset-Pool 的 RAID-Z2 冗余保护和 ZFS 快照能力，同时 JFrog 服务本身变为近乎无状态，便于升级和迁移。</span></p></blockquote><h2 id='执行与工作流层'><span>执行与工作流层</span></h2><p><span>这一层定义了数据如何在上述服务间流转，构成了日常开发的具体路径。</span></p><h3 id='31-典型开发工作流'><span>3.1 典型开发工作流</span></h3><ol start='' ><li><p><strong><span>需求与分支</span></strong><span>：开发者从 </span><code>main</code><span> 分支检出特性分支 </span><code>feature/xxx</code><span>。</span></p></li><li><p><strong><span>提交与验证</span></strong><span>：本地开发提交代码，触发 Pre-commit 钩子进行简单的格式化和静态检查。</span></p></li><li><p><strong><span>合并请求 (MR)</span></strong><span>：推送到 GitLab，创建 Merge Request。</span></p></li><li><p><strong><span>自动化流水线</span></strong><span>：</span></p><ul><li><p><span>CI 服务拉取代码。</span></p></li><li><p><span>运行单元测试和静态分析（SonarQube）。</span></p></li><li><p><span>构建测试制品。</span></p></li><li><p><strong><span>反馈</span></strong><span>：流水线状态和质量报告直接回写到 MR 评论区。</span></p></li></ul></li><li><p><strong><span>代码审查</span></strong><span>：资深开发者/MaintainerReview 代码，结合自动化的质量报告决定是否合并。</span></p></li><li><p><strong><span>合并与发布</span></strong><span>：合并入 </span><code>main</code><span>，触发发布流水线，生成正式版本制品推送到 Nexus/Harbor，并自动更新文档。</span></p></li></ol><h3 id='32-运维与维护工作流'><span>3.2 运维与维护工作流</span></h3><ol start='' ><li><p><strong><span>基础设施即代码 (IaC)</span></strong><span>：所有服务的配置变更（如 Nginx 配置、Docker Compose 文件）通过 Git 仓库管理。</span></p></li><li><p><strong><span>配置漂移检测</span></strong><span>：定期运行检查脚本，确保实际环境与 Git 配置一致。</span></p></li><li><p><strong><span>备份策略</span></strong><span>：</span></p><ul><li><p><strong><span>数据库</span></strong><span>：每日全量备份，每小时增量备份。</span></p></li><li><p><strong><span>代码库</span></strong><span>：实时镜像或高频快照。</span></p></li><li><p><strong><span>验证</span></strong><span>：每周自动化运行一次“备份恢复演练”，在一个隔离环境中尝试从备份恢复核心服务，确保备份文件有效。</span></p></li></ul></li></ol><hr /><h2 id='规范与治理层-specifications'><span>规范与治理层 (Specifications)</span></h2><p><span>规范是自动化的基石。</span></p><h3 id='41-代码库规范'><span>4.1 代码库规范</span></h3><ul><li><p><strong><span>Monorepo vs Polyrepo</span></strong><span>：明确项目的仓库策略。对于强依赖组件，建议 Monorepo 以保证原子性提交。</span></p></li><li><p><strong><span>目录结构</span></strong><span>：统一所有项目的顶层目录结构（e.g., </span><code>/src</code><span>, </span><code>/docs</code><span>, </span><code>/scripts</code><span>, </span><code>/tests</code><span>）。</span></p></li></ul><h3 id='42-分支与提交规范'><span>4.2 分支与提交规范</span></h3><ul><li><p><strong><span>分支模型</span></strong><span>：采用 Trunk Based Development 或 简化版 Git Flow。主分支必须保持随时可发布状态。</span></p></li><li><p><strong><span>Commit Message</span></strong><span>：强制遵循 </span><a href='https://www.conventionalcommits.org/'><span>Conventional Commits</span></a><span> 规范（feat, fix, docs, style, refactor...），以便自动化生成 Changelog。</span></p></li></ul><h3 id='43-版本号规范'><span>4.3 版本号规范</span></h3><ul><li><p><span>遵循 </span><strong><span>Semantic Versioning (SemVer 2.0.0)</span></strong><span>。</span></p></li><li><p><span>所有的发布制品必须打上版本 Tag，禁止使用 </span><code>latest</code><span> 这种不确定的标签部署生产环境。</span></p></li></ul><h3 id='44-审查规范'><span>4.4 审查规范</span></h3><ul><li><p><strong><span>Checklist</span></strong><span>：MR 模板中包含自查清单（文档是否更新？测试是否通过？）。</span></p></li><li><p><strong><span>最少人数</span></strong><span>：核心模块至少需要 2 人 Approval 方可合并。</span></p></li></ul><h3 id='45-硬件与资源规范'><span>4.5 硬件与资源规范</span></h3><ul><li><p><strong><span>命名规范</span></strong><span>：服务器、虚拟机、容器需遵循统一的命名规则（e.g., </span><code>role-region-index</code><span>）。</span></p></li><li><p><strong><span>标签管理</span></strong><span>：利用 Label 管理构建节点的能力（e.g., </span><code>windows</code><span>, </span><code>linux</code><span>, </span><code>gpu</code><span>, </span><code>high-mem</code><span>），确保任务调度到正确的节点。</span></p></li></ul><h1 id='具体实施步骤'><span>具体实施步骤</span></h1><p><span>我们假定物理层已经按照网络规划完成了网络设备的配置。我们的管理机目前已经接入VLAN 99，IP为10.99.99.254.</span></p><h2 id='truenas'><span>TrueNAS</span></h2><p><span>首先使用TrueNAS的ISO安装TrueNAS系统，创建Admin时选择Configure in Web UI。</span></p><p><span>在完成物理安装并重启后，P-01 会进入 TrueNAS Scale 的 Console Setup 蓝底菜单界面。由于我们正处于物理隔离环境且需要严格遵循 10.x.x.x 的网络规划，你需要手动完成以下初始化步骤：</span></p><ol start='' ><li><p><span>在TrueNAS终端中配置网络接口(Configure Network Interfaces)。三张分属VLAN 10, VLAN 40, VLAN 99的网卡分别分配IP(Alias) 10.10.10.10/24, 10.40.40.5/24, 10.99.99.11/24。VLAN 10的MTU设置为9000以支持巨型帧，VLAN 40的MTU设置为1500，VLAN 99的MTU设置为1500。</span></p></li><li><p><span>配置默认路由与 DNS(Configure Default Settings)。虽然内网物理隔离，但为了后续与 VM-01 (DNS) 通讯，必须预设好指向。设置Host Name为 nas-core, Domain为 coca.local，GateWay 为 10.40.40.1（核心交换机网关），DNS Server 1为 10.40.40.10（指向未来的 VM-01 Windows AD/DNS），DNS Server 2为 10.40.40.1（核心交换机备用）。</span>
+<img src="./assets/TrueNAS/nas-dns.png" referrerpolicy="no-referrer" alt="NAS-DNS"></p></li></ol><p><span>此时我们应该已经可以通过管理机访问</span><a href='http://10.99.99.11' target='_blank' class='url'>http://10.99.99.11</a><span>，浏览器访问的话你应该能看到TrueNAS的Web界面。选择Administrator User并设置好密码。</span>
+<img src="./assets/TrueNAS/nas-web.png" referrerpolicy="no-referrer" alt="NAS-Web"></p><p><span>下面我们来配置逻辑磁盘（示例）。</span></p><ol start='' ><li><p><span>创建存储池Storage -&gt; Create Pool</span>
+<img src="./assets/TrueNAS/create_pool.png" referrerpolicy="no-referrer" alt="Create Pool"></p><ol start='' ><li><p><span>创建Fast-Pool, 组成RAID-10</span></p></li><li><p><span>创建Asset-Pool, 组成RAID-Z2，并设置SSD为Special VDEV用于元数据加速</span></p></li></ol></li><li><p><span>创建ZFS卷（ZVol）。Datasets -&gt; Fast-Pool</span>
+<img src="./assets/TrueNAS/create_zvol.png" referrerpolicy="no-referrer" alt="Create ZVol">
+<span>创建Fast-Pool/iscsi-vms</span>
+<img src="./assets/TrueNAS/zvol_info.png" referrerpolicy="no-referrer" alt="ZVol Info"></p></li><li><p><span>开启iSCSI服务，Portal绑定到VLAN 10的10.10.10.10（TrueNAS在VLAN 10的IP），Initiator允许PVE 10.10.10.20访问，Target 关联到LUN0. (System Settings &gt; Services)</span></p></li></ol><p><span>TrueNAS支持SSH链接和专属命令行，也可以使用命令行执行脚本，这符合IaC的理念。</span></p><h2 id='pve'><span>PVE </span></h2><h3 id='pve-安装与磁盘配置'><span>PVE 安装与磁盘配置</span></h3><p><img src="./assets/PVE/pve-install.png" referrerpolicy="no-referrer" alt="PVE Install"></p><p><span>此时访问10.99.99.20:8006，你应该能看到PVE的Web界面。</span></p><p><img src="./assets/PVE/pve-ui.png" referrerpolicy="no-referrer" alt="PVE UI"></p><p><span>设置好网络参数，PVE应该可以访问VLAN 10, VLAN 40, VLAN 99。</span></p><p><img src="./assets/PVE/pve-network.png" referrerpolicy="no-referrer" alt="PVE Network"></p><p><span>添加我们创建的iSCSI Target。</span></p><p><img src="./assets/PVE/pve-iscsi.png" referrerpolicy="no-referrer" alt="PVE iSCSI"></p><p><span>现在PVE可以访问iSCSI Target了，但是是Raw Diask，所以我们需要初始化一个LVM Volume Group，且不可Shared。</span></p><p><img src="./assets/PVE/pve-lvm.png" referrerpolicy="no-referrer" alt="PVE LVM"></p><p><span>然后使用命令行在其上创建一个Thin Pool：</span></p><p><img src="./assets/PVE/pve-storage.png" referrerpolicy="no-referrer" alt="PVE Storage"></p><p><span>最后创建一个LVM Thin Volume Group并删除临时LVM，因为两者用的时相同的物理卷组：</span></p><p><img src="./assets/PVE/pve-lvm-thin.png" referrerpolicy="no-referrer" alt="PVE Thin"></p><p><span>这一切基于我们只有一个PVE核心节点，其集群化后存在风险，不可集群化，详见</span><a href='https://forum.proxmox.com/threads/creating-lvm-thin-on-top-of-iscsi.158114'><span>链接</span></a><span>。</span></p><p><span>操作后状态如下：</span></p><p><img src="./assets/PVE/pve-status-1.png" referrerpolicy="no-referrer" alt="PVE Status 1"></p><h3 id='vm-01-windows-addns-创建'><span>VM-01 (Windows AD/DNS) 创建</span></h3><p><span>为了保证IaC，提高基础设施的可维护性，下面我们将转向Terraform管理。首先在PVE上创建一个API Token:</span></p><p><img src="./assets/PVE/pve-api-token.png" referrerpolicy="no-referrer" alt="PVE API Token"></p><p><span>我们需要一个proxmox provider以让Terraform管理PVE：</span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="terraform" style="break-inside: unset;"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="terraform"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51875px; left: 8px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">terraform</span> {</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;<span class="cm-variable">required_providers</span> {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">proxmox</span> <span class="cm-operator">=</span> {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;<span class="cm-variable">source</span> &nbsp;<span class="cm-operator">=</span> <span class="cm-string">"telmate/proxmox"</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;<span class="cm-variable">version</span> <span class="cm-operator">=</span> <span class="cm-string">"3.0.2-rc07"</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  }</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  }</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">provider</span> <span class="cm-string">"proxmox"</span> {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;<span class="cm-variable">pm_api_url</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-operator">=</span> <span class="cm-string">"https://10.99.99.20:8006/api2/json"</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;<span class="cm-variable">pm_api_token_id</span> &nbsp; &nbsp; <span class="cm-operator">=</span> <span class="cm-string">"root@pam!terr"</span> <span class="cm-comment"># terr is the token ID</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;<span class="cm-variable">pm_api_token_secret</span> <span class="cm-operator">=</span> <span class="cm-string">"2317d593-6a57-4400-9d03-a5319a315e66"</span> <span class="cm-comment"># the token secret</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;<span class="cm-variable">pm_tls_insecure</span> &nbsp; &nbsp; <span class="cm-operator">=</span> <span class="cm-keyword">true</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 346px;"></div><div class="CodeMirror-gutters" style="display: none; height: 346px;"></div></div></div></pre><p><span>然后将Windows Server 2025 ISO和Virtio ISO上传到PVE的Local Storage，不然Windows Installer看不到iSCSI硬盘。</span></p><p><span>## </span></p><p><span>基于你的最新思考，特别是意识到“基础设施工具（Ansible）不能依赖它所管理的资源”这一关键点，我们重新设计了 Coca 架构的 数据库分配策略 V2.0。</span></p><p><span>这个新策略的核心逻辑是：按“故障爆炸半径”和“救火优先级”进行分级。</span></p><h2 id='coca-数据库分级策略-the-coca-db-standard'><span>Coca 数据库分级策略 (The Coca DB Standard)</span></h2><p><span>我们将 100+ 个服务的数据库划分为三个安全等级（Tier 0, Tier 1, Tier 2）以及一个特殊的缓存层。</span></p><p><span>Tier 0: 基础设施控制层 (The Control Plane)</span>
+<span>定义：管理其他服务器“生死”的服务。如果它们挂了，你可能连修复命令都发不出去。</span></p><p><span>包含服务：Ansible AWX / Semaphore, HashiCorp Vault, NetBox, Keycloak (身份认证)。</span></p><p><span>策略：绝对隔离 (Strict Isolation)。</span></p><p><span>部署方式：每个服务自带独立的数据库容器（Sidecar模式）。</span></p><p><span>网络：甚至不加入公共后端网络，仅通过特定端口暴露给 Web UI。</span></p><p><span>理由：避免“死锁”。当共享数据库崩溃时，你需要 Ansible 去自动重启它，如果 Ansible 也依赖该数据库，你就陷入了死循环。</span></p><p><span>Tier 1: 业务核心层 (The Mission Critical)</span>
+<span>定义：1000 人研发工作的“饭碗”。如果挂了，全公司代码提交、编译、发布全部停摆。</span></p><p><span>包含服务：GitLab, JFrog Artifactory, Sentry, SonarQube。</span></p><p><span>策略：独享实例 (Dedicated Instance)。</span></p><p><span>部署方式：每个服务配置一个经过专门参数调优（Tuned）的独立数据库容器。</span></p><p><span>存储：挂载到 TrueNAS fast-pool 的独立 Dataset 上，配置高频快照。</span></p><p><span>理由：</span></p><p><span>GitLab 需要极高的并发写入能力。</span></p><p><span>SonarQube 分析代码时会长时间占用 CPU，不能让它拖慢 GitLab。</span></p><p><span>Sentry 的写入量极大，容易产生慢查询，必须隔离。</span></p><p><span>Tier 2: 长尾应用层 (The Long Tail)</span>
+<span>定义：辅助性工具。挂了只会影响局部体验（如文档打不开、看板看不了），不影响核心产出。</span></p><p><span>包含服务：Outline Wiki, BookStack, Nginx Proxy Manager, Portainer, 各种 Dashboard, 内部签到系统。</span></p><p><span>策略：共享集群 (Shared Cluster)。</span></p><p><span>部署方式：在 VM-04 上建立一组 &quot;Public DBs&quot;。</span></p><p><span>infra-shared-postgres (PostgreSQL 16)</span></p><p><span>infra-shared-mysql (MySQL 8.0)</span></p><p><span>资源：统一分配 4GB-8GB 内存，服务之间通过 Database Name 隔离。</span></p><p><span>理由：极大节省内存。80 个空闲的小服务如果每人带一个 MySQL，系统内存会被榨干。</span></p><p><span>Tier 3: 缓存与队列层 (Redis Strategy)</span>
+<span>策略：按“数据持久性”分离。</span></p><p><span>Redis-Queue (独享)：给 GitLab/Sentry 专用。不仅作缓存，还作任务队列（Sidekiq）。要求极低延迟，建议独享。</span></p><p><span>Redis-Cache (共享)：给 Tier 2 的所有小服务做页面缓存。挂了也就页面加载慢一点，无所谓。</span></p><h2 id='实施蓝图docker-compose-规划'><span>实施蓝图：Docker Compose 规划</span></h2><p><span>在 VM-04 上，你的 docker-compose 文件结构应该反映这种分层。</span></p><ol start='' ><li><p><span>Tier 0: Ansible Semaphore (完全自闭环)</span>
+<span>YAML</span></p></li></ol><h1 id='~coca-servicestier0-infrasemaphoredocker-composeyml'><span>~/coca-services/tier0-infra/semaphore/docker-compose.yml</span></h1><p><span>services:</span>
+<span>  semaphore:</span>
+<span>    image: semaphoreui/semaphore</span>
+<span>    depends_on:</span>
+<span>      - sem-db # 依赖自己的专属小数据库</span></p><p><span>  sem-db: # 只有 semaphore 能用，外部不可见</span>
+<span>    image: postgres:15-alpine</span>
+<span>    volumes:</span>
+<span>      - /mnt/fast-pool/infra/semaphore-db:/var/lib/postgresql/data</span>
+<span>    networks:</span>
+<span>      - internal-only</span></p><ol start='2' ><li><p><span>Tier 1: GitLab (独享巨兽)</span>
+<span>YAML</span></p></li></ol><h1 id='~coca-servicestier1-coregitlabdocker-composeyml'><span>~/coca-services/tier1-core/gitlab/docker-compose.yml</span></h1><p><span>services:</span>
+<span>  gitlab:</span>
+<span>    image: gitlab/gitlab-ce</span>
+<span>    depends_on:</span>
+<span>      - gitlab-postgresql # 依赖专属调优数据库</span>
+<span>      - gitlab-redis      # 依赖专属队列</span></p><p><span>  gitlab-postgresql:</span>
+<span>    image: postgres:14 # 锁定版本</span>
+<span>    command: postgres -c &#39;shared_buffers=2GB&#39; -c &#39;work_mem=64MB&#39; # 专属调优</span>
+<span>    volumes:</span>
+<span>      - /mnt/fast-pool/core/gitlab-db:/var/lib/postgresql/data</span></p><p><span>  gitlab-redis:</span>
+<span>    image: redis:6.2</span></p><ol start='3' ><li><p><span>Tier 2: 共享数据库组 (节省资源)</span>
+<span>YAML</span></p></li></ol><h1 id='~coca-servicestier2-sharedshared-dbdocker-composeyml'><span>~/coca-services/tier2-shared/shared-db/docker-compose.yml</span></h1><p><span>services:</span>
+<span>  shared-postgres:</span>
+<span>    image: postgres:16</span>
+<span>    container_name: shared-pg</span>
+<span>    ports:</span>
+<span>      - &quot;5432:5432&quot; # 暴露给内部网络</span>
+<span>    volumes:</span>
+<span>      - /mnt/fast-pool/shared/pg-data:/var/lib/postgresql/data</span>
+<span>    deploy:</span>
+<span>      resources:</span>
+<span>        limits:</span>
+<span>          memory: 8G # 给足内存供80个小服务分享</span></p><p><span>  shared-mysql:</span>
+<span>    image: mysql:8.0</span>
+<span>    container_name: shared-mysql</span>
+<span>    # ...配置同上...</span></p><h2 id='总结与决策'><span>总结与决策</span></h2><p><span>这个 V2.0 策略 是最稳健的：</span></p><p><span>Ansible/Vault 可以在核战中幸存（Tier 0 隔离）。</span></p><p><span>GitLab/JFrog 性能拉满，互不干扰（Tier 1 独享）。</span></p><p><span>80 个小服务 乖乖排队，不浪费公司内存（Tier 2 共享）。</span></p><p><span>苏鹏，数据库的设计已经完美闭环。现在，请允许我执行下一步：为你提供 VM-01 (Windows AD) 的 Terraform 代码，让我们把这套基础设施的“身份验证中心”立起来。</span></p><p><span>针对隔离编译需求。multirepo + 高频联动 + commit 版本</span>
+<span>不是“选择”，而是“症状”。</span></p></div></div>
+</body>
+</html>

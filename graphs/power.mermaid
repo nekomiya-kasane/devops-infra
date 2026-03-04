@@ -1,0 +1,95 @@
+sequenceDiagram
+    autonumber
+
+    box "外部环境 (External)" #f9f9f9
+        participant External as 💾 离线硬盘 (Air Gap Ferry)
+        participant Grid as ⚡ 市电 (Utility Power)
+    end
+
+    box "物理基础设施 (Physical Infra)" #e1f5fe
+        participant UPS as 🔋 Smart UPS
+        participant TrueNAS as 🗄️ TrueNAS (Storage/NUT Master)
+        participant OpsHost as 🖥️ Ops Server (PVE/ESXi)
+    end
+
+    box "虚拟化服务层 (Virtual Services)" #e8f5e9
+        participant WinVM as 🟦 VM: Windows (AD/WSUS)
+        participant LinVM as 🟧 VM: Linux (PXE/Ansible/GitLab)
+    end
+
+    box "开发终端 (Endpoints)" #fff3e0
+        participant DevPC as 💻 开发机 (Workstation)
+    end
+
+    Note over External, DevPC: === 阶段一：日常自动化部署 & 更新 (Deployment Cycle) ===
+
+    Note right of External: 从外网带回的镜像与补丁
+    External->>TrueNAS: 1. 摆渡数据: 更新 Base.vhdx & WSUS Content
+    TrueNAS->>WinVM: 2. 挂载 iSCSI: WSUS 导入元数据
+
+    DevPC->>DevPC: 3. 裸机上电 (PXE Boot)
+    DevPC->>WinVM: 4. DHCP 请求 (Discover)
+    WinVM-->>DevPC: 5. DHCP 响应 (IP + Option 66/67 指向 Linux VM)
+  
+    DevPC->>LinVM: 6. 请求引导文件 (TFTP/HTTP)
+    LinVM-->>DevPC: 7. 发送 WinPE/iPXE 镜像
+  
+    Note over DevPC: 进入 WinPE 临时环境
+    DevPC->>TrueNAS: 8. 拉取最新 Base.vhdx (SMB/NFS)
+    DevPC->>DevPC: 9. 初始化 GPT 分区 & 建立 BCD 引导
+    DevPC->>DevPC: 10. 重启进入 Windows (Native Boot)
+
+    Note over DevPC: Windows 系统启动
+    DevPC->>WinVM: 11. 自动加域 (AD Join)
+  
+    LinVM->>DevPC: 12. Ansible 扫描发现新主机
+    LinVM->>DevPC: 13. WinRM 推送配置 (安装 VS2022/CMake/驱动)
+  
+    DevPC->>WinVM: 14. WSUS 检查更新
+    WinVM->>TrueNAS: 15. 读取补丁数据 (Content)
+    TrueNAS-->>DevPC: 16. 下发补丁流
+
+    Note over External, DevPC: === 系统进入正常开发运行状态... (Time Skip) ===
+
+    %%
+  
+    rect rgb(255, 240, 240)
+    Note over External, DevPC: === 阶段二：异常断电保护流程 (Power Loss Event) ===
+  
+    Grid->>UPS: ❌ 17. 突发断电 (Grid Failure)
+    UPS->>UPS: 切换至电池模式 (On Battery)
+    UPS-->>TrueNAS: 18. USB 信号报警 (Wall Power Lost)
+  
+    Note right of TrueNAS: 等待缓冲期 (如 120秒)<br/>确认非电压闪断
+
+    TrueNAS->>TrueNAS: 19. 触发 FSD (Forced Shutdown)
+    TrueNAS->>OpsHost: 20. NUT 广播: "立即关机!"
+  
+    par 并行撤退 (Parallel Shutdown)
+        OpsHost->>WinVM: 21. 发送 ACPI 关机信号
+        OpsHost->>LinVM: 21. 发送 ACPI 关机信号
+    and
+        Note right of LinVM: GitLab 刷写内存数据<br/>WSUS 停止数据库
+        WinVM->>TrueNAS: 22. 写入最后的数据 (iSCSI IO)
+        LinVM->>TrueNAS: 22. 写入最后的数据 (NFS IO)
+    end
+  
+    WinVM-->>OpsHost: 23. VM 已关闭 (PowerOff)
+    LinVM-->>OpsHost: 23. VM 已关闭 (PowerOff)
+
+    Note right of OpsHost: 确认所有 VM 停止
+    OpsHost->>OpsHost: 24. 卸载存储挂载点 (Unmount)
+    OpsHost->>OpsHost: 25. 宿主机系统关闭 (Halt)
+    OpsHost--xTrueNAS: 网络连接中断
+
+    Note right of TrueNAS: 存储端最后防线
+    TrueNAS->>TrueNAS: 26. 检测到 OpsHost 离线
+    TrueNAS->>TrueNAS: 27. 停止 iSCSI/NFS 服务
+    TrueNAS->>TrueNAS: 28. 🛑 ZFS Pool Sync (强制落盘)
+  
+    TrueNAS->>UPS: 29. 发送自杀指令 (Kill Power)
+    TrueNAS->>TrueNAS: 30. 系统关闭 (System Halt)
+  
+    Note right of UPS: 收到指令或<br/>电池耗尽
+    UPS->>UPS: 31. ⚡ 切断所有输出电源
+    end

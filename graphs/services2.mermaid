@@ -1,0 +1,91 @@
+graph TB
+    %% ==========================================
+    %% 样式定义
+    %% ==========================================
+    classDef gateway fill:#e3f2fd,stroke:#1565c0,stroke-width:3px,color:#0d47a1;
+    classDef auth fill:#fffde7,stroke:#fbc02d,stroke-width:2px,color:#f57f17;
+    classDef container fill:#f3e5f5,stroke:#8e24aa,stroke-width:1px,color:#4a148c;
+    classDef vm_standalone fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20;
+    classDef storage fill:#cfd8dc,stroke:#455a64,stroke-width:3px,color:#263238;
+    classDef client fill:#ffffff,stroke:#333333,stroke-width:1px;
+
+    %% ==========================================
+    %% 1. 客户端层
+    %% ==========================================
+    subgraph Client_Layer ["客户端接入层 (VLAN 20/30)"]
+        DevPC[开发/测试终端<br>浏览器/Git客户端/命令行]:::client
+    end
+
+    %% ==========================================
+    %% 2. 核心服务层 (VM-04 Swarm + 独立 VMs)
+    %% ==========================================
+    subgraph Service_Layer ["核心服务层 (逻辑视图)"]
+        direction TB
+
+        %% 网关与认证入口
+        subgraph Gateway_Auth ["入口与认证枢纽 (VM-04)"]
+            Traefik(Traefik Gateway<br>流量统一入口/SSL终止/路由发现):::gateway
+            Keycloak(Keycloak<br>身份认证代理/SSO):::auth
+        end
+
+        %% 应用容器集群
+        subgraph Swarm_Apps ["Docker Swarm 容器应用 (VM-04)"]
+            Outline(Outline<br>文档知识库):::container
+            CE(Compiler Explorer<br>C++编译分析):::container
+            MinIO(MinIO S3<br>对象存储网关):::container
+            OtherApps(ZenTao/Portainer等<br>其他管理工具):::container
+        end
+
+        %% 独立核心 VM (受 Traefik 路由)
+        subgraph Standalone_VMs [独立部署核心 VM]
+            GitLab(VM-02: GitLab<br>代码托管核心):::vm_standalone
+            JFrog(VM-03: JFrog<br>制品仓库核心):::vm_standalone
+        end
+    end
+
+    %% ==========================================
+    %% 3. 基础设施支持层
+    %% ==========================================
+    subgraph Infra_Support [基础设施支持]
+        AD(VM-01: Windows AD<br>用户目录源头):::auth
+        TrueNAS[(P-01: TrueNAS ZFS<br>统一持久化存储基座)]:::storage
+    end
+
+    %% ==========================================
+    %% 数据流向图例
+    %% ==========================================
+    %% 粗箭头 (==>) 表示 HTTPS 业务流量
+    %% 点状箭头 (-.->) 表示 认证/授权 信号流
+    %% 极粗箭头 (====>) 表示 存储 I/O 数据流
+
+    %% --- 1. 流量接入流程 ---
+    DevPC ==>|1. 发起请求<br>https://git.corp.local| Traefik
+
+    %% --- 2. 统一认证流程 (Auth Loop) ---
+    Traefik -.->|"2. 触发认证中间件<br>(ForwardAuth)"| Keycloak
+    Keycloak -.->|3. LDAP 校验凭据| AD
+    AD -.->|4. 凭据有效| Keycloak
+    Keycloak -.->|5. 颁发Token/放行请求| Traefik
+
+    %% --- 3. 路由分发流程 (Routing) ---
+    %% Traefik 根据域名将请求路由到正确的服务
+    Traefik ==>|6a. 路由转发| Outline
+    Traefik ==>|6b. 路由转发| CE
+    Traefik ==>|6c. 路由转发| GitLab
+    Traefik ==>|6d. 路由转发| JFrog
+    Traefik ==>|6e. S3 API转发| MinIO
+
+    %% --- 4. 持久化存储交互流程 (Persistence) ---
+    %% 服务产生的数据最终落盘到 TrueNAS
+
+    %% 直接挂载网络存储的服务
+    GitLab ====>|"挂载 iSCSI 卷<br>(Git仓库数据)"| TrueNAS
+    Outline ====>|"挂载 NFS 卷<br>(文档附件/数据库)"| TrueNAS
+    OtherApps ====>|"挂载 NFS 卷<br>(持久化配置)"| TrueNAS
+
+    %% 通过 MinIO S3 网关存储的服务
+    JFrog ====>|"S3 协议写入<br>(大文件制品)"| MinIO
+    MinIO ====>|"挂载 NFS/iSCSI<br>(最终落盘 ZFS)"| TrueNAS
+
+    %% 只读挂载
+    TrueNAS -.->|"只读 NFS 挂载<br>(编译器库文件)"| CE

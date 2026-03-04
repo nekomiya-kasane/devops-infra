@@ -1,0 +1,11 @@
+# Exclude large binary archives
+*.rar
+*.iso
+*.jar
+
+# Office temp files
+~$*
+
+# OS files
+Thumbs.db
+.DS_Store

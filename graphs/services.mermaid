@@ -1,0 +1,110 @@
+graph TB
+    %% ==========================================
+    %% 样式定义
+    %% ==========================================
+    classDef storage fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
+    classDef compute fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
+    classDef vm fill:#fff3e0,stroke:#ef6c00,stroke-width:2px,stroke-dasharray: 5 5;
+    classDef container fill:#f3e5f5,stroke:#7b1fa2,stroke-width:1px;
+    classDef client fill:#fff,stroke:#333,stroke-width:1px;
+    classDef ferry fill:#ffebee,stroke:#c62828,stroke-width:2px;
+
+    %% ==========================================
+    %% 1. 物理层与摆渡区
+    %% ==========================================
+    subgraph AirGap_Zone [P-03: 物理隔离摆渡区]
+        direction TB
+        Ext_HDD[专用加密硬盘]:::ferry
+        Ferry_Station[摆渡消杀站<br>多引擎查杀 + Hash校验]:::ferry
+    end
+
+    subgraph P_01_Storage [P-01: TrueNAS 存储基座]
+        direction TB
+        ZFS[(ZFS 40TB Pool<br>RAID-Z2)]:::storage
+        iSCSI_Target(iSCSI Target<br>VLAN 10):::storage
+        SMB_NFS(SMB / NFS<br>VLAN 40):::storage
+        UPS_Master(NUT Master<br>电源管理):::storage
+    end
+
+    %% ==========================================
+    %% 2. 计算层 (PVE Host)
+    %% ==========================================
+    subgraph P_02_Compute [P-02: PVE 计算宿主机]
+        direction TB
+        
+        %% VM-01 Windows 基础服务
+        subgraph VM_01 [VM-01: Win-Infra]
+            AD(Active Directory<br>身份认证):::vm
+            WSUS(WSUS<br>补丁分发):::vm
+            DHCP(DHCP / DNS<br>地址分配):::vm
+        end
+
+        %% VM-02 GitLab 核心
+        subgraph VM_02 [VM-02: GitLab-Core]
+            GitLab(GitLab Omnibus<br>代码托管):::vm
+            Runner(GitLab Runner<br>CI流水线):::vm
+        end
+
+        %% VM-03 JFrog 资产
+        subgraph VM_03 [VM-03: JFrog-Storage]
+            JFrog(JFrog Artifactory<br>Conan/Docker/Generic):::vm
+        end
+
+        %% VM-04 Docker Swarm 集群
+        subgraph VM_04 [VM-04: Linux-Apps & Swarm]
+            direction TB
+            Traefik(Traefik<br>网关入口):::container
+            Ansible(Ansible<br>运维中枢):::container
+            MinIO(MinIO S3<br>缓存/存储):::container
+            CE(Compiler Explorer<br>离线编译分析):::container
+            PXE_Srv(PXE / iPXE<br>系统引导):::container
+            Monitor(Prometheus/Grafana<br>全栈监控):::container
+            Docs(Outline/ZenTao<br>文档与协作):::container
+        end
+    end
+
+    %% ==========================================
+    %% 3. 终端接入层 (VLANs)
+    %% ==========================================
+    subgraph VLAN_20 [VLAN 20: 开发区]
+        Dev_PC[50台 开发机<br>Win/Linux + sccache]:::client
+    end
+
+    subgraph VLAN_30 [VLAN 30: 测试区]
+        Test_PC[测试机群<br>VHDX 原生启动]:::client
+    end
+
+    %% ==========================================
+    %% 4. 数据流向 (Data Flows)
+    %% ==========================================
+    
+    %% --- 存储流 (蓝色粗线) ---
+    iSCSI_Target ==>|iSCSI 流量<br>VLAN 10 Jumbo Frame| VM_02
+    iSCSI_Target ==>|iSCSI 流量| VM_03
+    ZFS -.->|挂载存储| MinIO
+
+    %% --- 摆渡流 (红色虚线) ---
+    Ext_HDD --> Ferry_Station
+    Ferry_Station -.->|上传制品/镜像| JFrog
+    Ferry_Station -.->|上传WSUS补丁| SMB_NFS
+
+    %% --- 开发流 (绿色线) ---
+    Dev_PC -->|HTTPS/Git| Traefik
+    Dev_PC -->|Auth| AD
+    Dev_PC -->|编译缓存| MinIO
+    Dev_PC -->|拉取依赖| JFrog
+    
+    %% --- 路由流 ---
+    Traefik --> GitLab
+    Traefik --> JFrog
+    Traefik --> Docs
+    Traefik --> CE
+
+    %% --- 运维流 (橙色线) ---
+    Ansible -->|WinRM/SSH 配置| Dev_PC
+    Ansible -->|控制 VHDX| Test_PC
+    PXE_Srv -.->|网络引导| Dev_PC
+    PXE_Srv -.->|网络引导| Test_PC
+
+    %% --- 电源流 ---
+    UPS_Master -.->|关机指令| P_02_Compute
